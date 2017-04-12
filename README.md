@@ -4,3 +4,5 @@
 ##接口说明
 见地址
 http://sysuhiker.cc/PhalApi/Public/demo/listAllApis.php
+
+http://sysuhiker.cc/PhalApi/Public/?service=Event.GetEventList
