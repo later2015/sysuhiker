@@ -47,10 +47,17 @@ class Api_Event extends PhalApi_Api {
                 'eventId' => array('name' => 'eventId', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
                 'userId' => array('name' => 'userId', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户id'),
                 'userComments' => array('name' => 'userComments', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动评论内容'),                   
-            ),//评论活动                       
-            'getMultiBaseInfo' => array(
-                'userIds' => array('name' => 'user_ids', 'type' => 'array', 'format' => 'explode', 'require' => true, 'desc' => '用户ID，多个以逗号分割'),
-            ),
+            ),//评论活动
+            'addEvent' => array(
+                'eventId' => array('name' => 'eventId', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
+                'userId' => array('name' => 'userId', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户id'),
+                'userComments' => array('name' => 'userComments', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动评论内容'),
+            ),//发起活动 TODO 更新请求参数
+            'editEvent' => array(
+                'eventId' => array('name' => 'eventId', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
+                'userId' => array('name' => 'userId', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户id'),
+                'userComments' => array('name' => 'userComments', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动评论内容'),
+            ),//修改活动 TODO 更新请求参数
         );
     }
 
@@ -249,9 +256,9 @@ class Api_Event extends PhalApi_Api {
      * @return string msg 提示信息
 	 * ,,
      */
-    public function addEventRe() {//TODO
+    public function addEventRe() {
         $rs = array('code' => 0, 'msg' => '');
-		$re_orderId='';
+		$re_orderId='';//TODO 该排序值需要加上去
 		$input = array('re_postId' => $this->eventId, 're_createUserId' => $this->userId, 're_modifyUserId' => $this->userId,'re_detail' => $this->userComments);
 		
         $domain = new Domain_Event();
@@ -271,22 +278,58 @@ class Api_Event extends PhalApi_Api {
         return $rs;
     }
     /**
-     * 批量获取用户基本信息
-     * @desc 用于获取多个用户基本信息
-     * @return int code 操作码，0表示成功
-     * @return array list 用户列表
-     * @return int list[].id 用户ID
-     * @return string list[].name 用户名字
-     * @return string list[].note 用户来源
+     * 发起活动
+     * @desc 发起活动
+     * @return int code 操作码，0表示成功，1表示失败
      * @return string msg 提示信息
+     * ,,
      */
-    public function getMultiBaseInfo() {
-        $rs = array('code' => 0, 'msg' => '', 'list' => array());
+    public function addEvent() {
+        $rs = array('code' => 0, 'msg' => '');
+        //TODO 更新发起活动的处理逻辑
+        $input = array('re_postId' => $this->eventId, 're_createUserId' => $this->userId, 're_modifyUserId' => $this->userId,'re_detail' => $this->userComments);
 
-        $domain = new Domain_User();
-        foreach ($this->userIds as $userId) {
-            $rs['list'][] = $domain->getEventInfo($userId);
+        $domain = new Domain_Event();
+        $result = $domain->addEventRe($input);
+
+        if ($result!='success') {
+            DI()->logger->debug('fail to comment.');
+
+            $rs['code'] = 1;
+//            $rs['msg'] = T('fail to comment.'.$result);
+            $rs['msg'] = 'fail to comment.'.$result;
+            return $rs;
         }
+
+        $rs['msg'] = "success";
+
+        return $rs;
+    }
+    /**
+     * 修改活动
+     * @desc 修改活动
+     * @return int code 操作码，0表示成功，1表示失败
+     * @return string msg 提示信息
+     * ,,
+     */
+    public function editEvent() {
+        $rs = array('code' => 0, 'msg' => '');
+        //TODO 更新修改活动信息的处理逻辑
+        $input = array('re_postId' => $this->eventId, 're_createUserId' => $this->userId, 're_modifyUserId' => $this->userId,'re_detail' => $this->userComments);
+
+        $domain = new Domain_Event();
+        $result = $domain->addEventRe($input);
+
+        if ($result!='success') {
+            DI()->logger->debug('fail to comment.');
+
+            $rs['code'] = 1;
+//            $rs['msg'] = T('fail to comment.'.$result);
+            $rs['msg'] = 'fail to comment.'.$result;
+            return $rs;
+        }
+
+        $rs['msg'] = "success";
 
         return $rs;
     }
