@@ -48,12 +48,12 @@ class Api_User extends PhalApi_Api {
 
     /**
      * 获取用户基本信息
-     * @desc 用于获取单个用户基本信息
+     * @desc 用于获取单个用户基本信息，访问后缀 /PhalApi/Public/?service=User.GetBaseInfo&user_id=1
      * @return int code 操作码，0表示成功，1表示用户不存在
      * @return object info 用户信息对象
-     * @return int info.id 用户ID
-     * @return string info.name 用户名字
-     * @return string info.note 用户来源
+     * @return int info.user_id 用户ID
+     * @return string info.user_name 用户名字
+     * @return string info.... 包含用户表的所有信息，具体字段名参考用户表
      * @return string msg 提示信息
      */
     public function getBaseInfo() {
@@ -164,9 +164,9 @@ class Api_User extends PhalApi_Api {
      * @desc 用于获取多个用户基本信息
      * @return int code 操作码，0表示成功
      * @return array list 用户列表
-     * @return int list[].id 用户ID
-     * @return string list[].name 用户名字
-     * @return string list[].note 用户来源
+     * @return int list[].user_id 用户ID
+     * @return string list[].user_name 用户名字
+     * @return string list[]..... 其他字段参考用户信息表
      * @return string msg 提示信息
      */
     public function getMultiBaseInfo() {
