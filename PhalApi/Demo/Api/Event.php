@@ -311,6 +311,21 @@ class Api_Event extends PhalApi_Api {
     public function addEvent() {
         $rs = array('code' => 0, 'msg' => '');
         //TODO 更新发起活动的处理逻辑
+//        'eventName' => array('name' => 'event_name', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动名称'),
+//                'eventType' => array('name' => 'event_type', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动类型'),
+//                'eventDetail' => array('name' => 'event_detail', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动详情'),
+//                'eventStarttime' => array('name' => 'event_starttime', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动开始时间'),
+//                'eventEndtime' => array('name' => 'event_endtime', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动结束时间'),
+//                'eventJoinStarttime' => array('name' => 'event_join_starttime', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动报名开始时间'),
+//                'eventJoinEndtime' => array('name' => 'event_join_endtime', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动报名结束时间'),
+//                'eventComments' => array('name' => 'event_comments', 'type' => 'string', 'min' => 0, 'require' => false, 'desc' => '活动备注'),
+//                'eventCreateUserId' => array('name' => 'event_createUserId', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动创建者'),
+//                'eventMaxhiker' => array('name' => 'event_maxhiker', 'type' => 'string', 'min' => 0, 'require' => false, 'desc' => '活动最大人数'),
+//                'eventGatherLocation' => array('name' => 'event_gather_location', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '集合地点'),
+//                'eventGatherTime' => array('name' => 'event_gather_time', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '集合时间'),
+//                'eventPlaceOfDeparture' => array('name' => 'event_place_of_departure', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '出发地'),
+//                'eventDestination' => array('name' => 'event_destination', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '目的地'),
+
         $input = array('re_postId' => $this->eventId, 're_createUserId' => $this->userId, 're_modifyUserId' => $this->userId,'re_detail' => $this->userComments);
 
         $domain = new Domain_Event();
