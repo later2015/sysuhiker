@@ -1,8 +1,10 @@
 <?php
 
-class Api_Event extends PhalApi_Api {
+class Api_Event extends PhalApi_Api
+{
 
-    public function getRules() {
+    public function getRules()
+    {
         return array(
             'getEventInfo' => array(
                 'eventId' => array('name' => 'event_id', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
@@ -22,21 +24,21 @@ class Api_Event extends PhalApi_Api {
             'joinEvent' => array(
                 'eventId' => array('name' => 'event_joinlist_eventid', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
                 'userId' => array('name' => 'event_joinlist_userid', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户id'),
-                'userPhone' => array('name' => 'event_joinlist_userphone', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '电话'), 
-                'qq' => array('name' => 'event_joinlist_qq', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => 'qq'),    
-                'userUrgentName' => array('name' => 'event_joinlist_userurgentname', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '紧急联系人'),   
-                'userUrgentPhone' => array('name' => 'event_joinlist_userurgentphone', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '紧急联系人电话'), 
-                'useraddress' => array('name' => 'event_joinlist_useraddress', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '地址'), 
+                'userPhone' => array('name' => 'event_joinlist_userphone', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '电话'),
+                'qq' => array('name' => 'event_joinlist_qq', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => 'qq'),
+                'userUrgentName' => array('name' => 'event_joinlist_userurgentname', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '紧急联系人'),
+                'userUrgentPhone' => array('name' => 'event_joinlist_userurgentphone', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '紧急联系人电话'),
+                'useraddress' => array('name' => 'event_joinlist_useraddress', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '地址'),
                 'userrole' => array('name' => 'event_joinlist_userrole', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '团队角色'),
                 'userComments' => array('name' => 'event_joinlist_comments', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '备注'),
-                'insurance' => array('name' => 'event_joinlist_insurance', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '保险信息'), 
-                'usercamp' => array('name' => 'event_joinlist_usercamp', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '帐篷信息'), 
-                'usercamppad' => array('name' => 'event_joinlist_usercamppad', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '防潮垫信息'), 
-                'usersleepingbag' => array('name' => 'event_joinlist_usersleepingbag', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '睡袋信息'), 
-                'userinterphone' => array('name' => 'event_joinlist_userinterphone', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '对讲机信息'), 
-                'userbag' => array('name' => 'event_joinlist_userbag', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '登山包信息'), 
-                'userBurner' => array('name' => 'event_joinlist_userBurner', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '炉头信息'),  
-                'userpot' => array('name' => 'event_joinlist_userpot', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '套锅信息'),                   
+                'insurance' => array('name' => 'event_joinlist_insurance', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '保险信息'),
+                'usercamp' => array('name' => 'event_joinlist_usercamp', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '帐篷信息'),
+                'usercamppad' => array('name' => 'event_joinlist_usercamppad', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '防潮垫信息'),
+                'usersleepingbag' => array('name' => 'event_joinlist_usersleepingbag', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '睡袋信息'),
+                'userinterphone' => array('name' => 'event_joinlist_userinterphone', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '对讲机信息'),
+                'userbag' => array('name' => 'event_joinlist_userbag', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '登山包信息'),
+                'userBurner' => array('name' => 'event_joinlist_userBurner', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '炉头信息'),
+                'userpot' => array('name' => 'event_joinlist_userpot', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '套锅信息'),
             ),//报名参加活动
             'quit' => array(
                 'eventId' => array('name' => 'event_joinlist_eventid', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
@@ -46,7 +48,7 @@ class Api_Event extends PhalApi_Api {
             'addEventRe' => array(
                 'eventId' => array('name' => 'eventId', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
                 'userId' => array('name' => 'userId', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户id'),
-                'userComments' => array('name' => 'userComments', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动评论内容'),                   
+                'userComments' => array('name' => 'userComments', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动评论内容'),
             ),//评论活动
             'addEvent' => array(
                 'eventName' => array('name' => 'event_name', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动名称'),
@@ -93,18 +95,19 @@ class Api_Event extends PhalApi_Api {
      * @return int info.event_id 活动ID
      * @return string info.event_name 活动名字
      * @return string info.event_type 活动类型
-	 * @return string info.event_detail 活动详情
+     * @return string info.event_detail 活动详情
      * @return date info.event_starttime 活动开始时间
-	 * @return date info.event_endtime 活动结束时间
+     * @return date info.event_endtime 活动结束时间
      * @return date info.event_join_starttime 活动报名开始时间
-	 * @return date info.event_join_endtime 活动报名结束时间
+     * @return date info.event_join_endtime 活动报名结束时间
      * @return string info.event_comments 活动备注
-	 * @return date info.event_createtime 活动创建时间
-	 * @return string info.event_createUserId 活动创建者
-	 * @return int info.event_maxhiker 活动最大人数
-	 * @return string msg 提示信息
+     * @return date info.event_createtime 活动创建时间
+     * @return string info.event_createUserId 活动创建者
+     * @return int info.event_maxhiker 活动最大人数
+     * @return string msg 提示信息
      */
-    public function getEventInfo() {
+    public function getEventInfo()
+    {
         $rs = array('code' => 0, 'msg' => '', 'info' => array());
 
         $domain = new Domain_Event();
@@ -122,6 +125,7 @@ class Api_Event extends PhalApi_Api {
 
         return $rs;
     }
+
     /**
      * 获取活动列表
      * @desc 用于获取活动列表
@@ -130,17 +134,18 @@ class Api_Event extends PhalApi_Api {
      * @return int list[].event_id 活动ID
      * @return string list[].event_name 活动名字
      * @return string list[].event_type 活动类型
-	 * @return string list[].event_starttime 活动开始时间
-	 * @return string list[].event_join_endtime 活动报名截止时间
-	 * @return string list[].event_comments 活动备注
+     * @return string list[].event_starttime 活动开始时间
+     * @return string list[].event_join_endtime 活动报名截止时间
+     * @return string list[].event_comments 活动备注
      * @return string msg 提示信息
-	 * ,,
+     * ,,
      */
-    public function getEventList() {
+    public function getEventList()
+    {
         $rs = array('code' => 0, 'msg' => '', 'list' => array());
 
         $domain = new Domain_Event();
-        $list = $domain->getEventList($this->page,$this->pagesize);
+        $list = $domain->getEventList($this->page, $this->pagesize);
 
         if (empty($list)) {
             DI()->logger->debug('event list not found');
@@ -154,7 +159,8 @@ class Api_Event extends PhalApi_Api {
 
         return $rs;
     }
-	/**
+
+    /**
      * 获取活动报名列表
      * @desc 用于获取活动报名名单列表
      * @return int code 操作码，0表示成功，1表示获取失败
@@ -162,13 +168,14 @@ class Api_Event extends PhalApi_Api {
      * @return int list[].event_id 活动ID
      * @return string list[].event_joinlist_usernick 报名者昵称
      * @return string list[].event_joinlist_usergender 性别
-	 * @return string list[].event_joinlist_userrole 角色
-	 * @return string list[].event_joinlist_joindate 活动报名时间
-	 * @return string list[].event_joinlist_comments 报名备注
+     * @return string list[].event_joinlist_userrole 角色
+     * @return string list[].event_joinlist_joindate 活动报名时间
+     * @return string list[].event_joinlist_comments 报名备注
      * @return string msg 提示信息
-	 * ,,
+     * ,,
      */
-    public function getEventJoinList() {
+    public function getEventJoinList()
+    {
         $rs = array('code' => 0, 'msg' => '', 'list' => array());
 
         $domain = new Domain_Event();
@@ -186,7 +193,8 @@ class Api_Event extends PhalApi_Api {
 
         return $rs;
     }
-	/**
+
+    /**
      * 获取活动评论列表
      * @desc 用于获取活动评论列表
      * @return int code 操作码，0表示成功，1表示获取失败
@@ -194,16 +202,17 @@ class Api_Event extends PhalApi_Api {
      * @return int list[].re_postId 活动的id或者文章的id
      * @return string list[].re_orderId 评论的排序id
      * @return string list[].re_detail 评论内容
-	 * @return string list[].re_createTime 评论时间
-	 * @return string list[].re_createUserId 评论作者
+     * @return string list[].re_createTime 评论时间
+     * @return string list[].re_createUserId 评论作者
      * @return string msg 提示信息
-	 * ,,
+     * ,,
      */
-    public function getEventReList() {
+    public function getEventReList()
+    {
         $rs = array('code' => 0, 'msg' => '', 'list' => array());
 
         $domain = new Domain_Event();
-        $list = $domain->getEventReList($this->eventId,$this->page,$this->pagesize);
+        $list = $domain->getEventReList($this->eventId, $this->page, $this->pagesize);
 
         if (empty($list)) {
             DI()->logger->debug('event list not found');
@@ -217,29 +226,31 @@ class Api_Event extends PhalApi_Api {
 
         return $rs;
     }
-	/**
+
+    /**
      * 报名活动
      * @desc 报名活动
      * @return int code 操作码，0表示成功，1表示失败
      * @return string msg 提示信息
-	 * ,,
+     * ,,
      */
-    public function joinEvent() {
+    public function joinEvent()
+    {
         $rs = array('code' => 0, 'msg' => '');
-		$input = array('event_joinlist_eventid' => $this->eventId, 'event_joinlist_userid' => $this->userId, 'event_joinlist_userphone' => $this->userPhone,'event_joinlist_qq' => $this->qq,
-		'event_joinlist_userurgentname' => $this->userUrgentName, 'event_joinlist_userurgentphone' => $this->userUrgentPhone, 'event_joinlist_comments' => $this->userComments,'event_joinlist_useraddress' => $this->useraddress,
-		'event_joinlist_insurance' => $this->insurance, 'event_joinlist_usercamp' => $this->usercamp, 'event_joinlist_usercamppad' => $this->usercamppad,
-		'event_joinlist_usersleepingbag' => $this->usersleepingbag, 'event_joinlist_userinterphone' => $this->userinterphone, 'event_joinlist_userbag' => $this->userbag,
-		'event_joinlist_userBurner' => $this->userBurner, 'event_joinlist_userpot' => $this->userpot,'event_joinlist_userrole' => $this->userrole);
-		
+        $input = array('event_joinlist_eventid' => $this->eventId, 'event_joinlist_userid' => $this->userId, 'event_joinlist_userphone' => $this->userPhone, 'event_joinlist_qq' => $this->qq,
+            'event_joinlist_userurgentname' => $this->userUrgentName, 'event_joinlist_userurgentphone' => $this->userUrgentPhone, 'event_joinlist_comments' => $this->userComments, 'event_joinlist_useraddress' => $this->useraddress,
+            'event_joinlist_insurance' => $this->insurance, 'event_joinlist_usercamp' => $this->usercamp, 'event_joinlist_usercamppad' => $this->usercamppad,
+            'event_joinlist_usersleepingbag' => $this->usersleepingbag, 'event_joinlist_userinterphone' => $this->userinterphone, 'event_joinlist_userbag' => $this->userbag,
+            'event_joinlist_userBurner' => $this->userBurner, 'event_joinlist_userpot' => $this->userpot, 'event_joinlist_userrole' => $this->userrole);
+
         $domain = new Domain_Event();
         $result = $domain->joinEvent($input);
 
-        if ($result!='success') {
+        if ($result != 'success') {
             DI()->logger->debug('fail to join.');
 
             $rs['code'] = 1;
-            $rs['msg'] = T('fail to join.'.$result);
+            $rs['msg'] = T('fail to join.' . $result);
             return $rs;
         }
 
@@ -247,21 +258,23 @@ class Api_Event extends PhalApi_Api {
 
         return $rs;
     }//TODO	
-	/**
+
+    /**
      * 退出活动
      * @desc 退出活动
      * @return int code 操作码，0表示成功，1表示获取失败
      * @return string msg 提示信息
-	 * ,,
+     * ,,
      */
-    public function quit() {
+    public function quit()
+    {
         $rs = array('code' => 0, 'msg' => '');
-		$input = array('event_joinlist_eventid' => $this->eventId, 'event_joinlist_userid' => $this->userId, 'event_joinlist_comments' => $this->userComments);
-		
+        $input = array('event_joinlist_eventid' => $this->eventId, 'event_joinlist_userid' => $this->userId, 'event_joinlist_comments' => $this->userComments);
+
         $domain = new Domain_Event();
         $result = $domain->quit($input);
 
-        if ($result!='success') {
+        if ($result != 'success') {
             DI()->logger->debug('fail to quit.');
 
             $rs['code'] = 1;
@@ -273,27 +286,29 @@ class Api_Event extends PhalApi_Api {
 
         return $rs;
     }//TODO	    
-	/**
+
+    /**
      * 评论活动
      * @desc 评论活动
      * @return int code 操作码，0表示成功，1表示失败
      * @return string msg 提示信息
-	 * ,,
+     * ,,
      */
-    public function addEventRe() {
+    public function addEventRe()
+    {
         $rs = array('code' => 0, 'msg' => '');
-		$re_orderId='';//TODO 该排序值需要加上去
-		$input = array('re_postId' => $this->eventId, 're_createUserId' => $this->userId, 're_modifyUserId' => $this->userId,'re_detail' => $this->userComments);
-		
+        $re_orderId = '';//TODO 该排序值需要加上去
+        $input = array('re_postId' => $this->eventId, 're_createUserId' => $this->userId, 're_modifyUserId' => $this->userId, 're_detail' => $this->userComments);
+
         $domain = new Domain_Event();
         $result = $domain->addEventRe($input);
 
-        if ($result!='success') {
+        if ($result != 'success') {
             DI()->logger->debug('fail to comment.');
 
             $rs['code'] = 1;
 //            $rs['msg'] = T('fail to comment.'.$result);
-			$rs['msg'] = 'fail to comment.'.$result;
+            $rs['msg'] = 'fail to comment.' . $result;
             return $rs;
         }
 
@@ -301,6 +316,7 @@ class Api_Event extends PhalApi_Api {
 
         return $rs;
     }
+
     /**
      * 发起活动
      * @desc 发起活动
@@ -308,10 +324,11 @@ class Api_Event extends PhalApi_Api {
      * @return string msg 提示信息
      * ,,
      */
-    public function addEvent() {
+    public function addEvent()
+    {
         $rs = array('code' => 0, 'msg' => '');
         //TODO 更新发起活动的处理逻辑
-//        'eventName' => array('name' => 'event_name', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动名称'),
+//                'eventName' => array('name' => 'event_name', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动名称'),
 //                'eventType' => array('name' => 'event_type', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动类型'),
 //                'eventDetail' => array('name' => 'event_detail', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动详情'),
 //                'eventStarttime' => array('name' => 'event_starttime', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动开始时间'),
@@ -326,17 +343,30 @@ class Api_Event extends PhalApi_Api {
 //                'eventPlaceOfDeparture' => array('name' => 'event_place_of_departure', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '出发地'),
 //                'eventDestination' => array('name' => 'event_destination', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '目的地'),
 
-        $input = array('re_postId' => $this->eventId, 're_createUserId' => $this->userId, 're_modifyUserId' => $this->userId,'re_detail' => $this->userComments);
+        $input = array('event_name' => $this->eventName,
+            'event_type' => $this->eventType,
+            'event_detail' => $this->eventDetail,
+            'event_starttime' => $this->eventStarttime,
+            'event_endtime' => $this->eventEndtime,
+            'event_join_starttime' => $this->eventJoinStarttime,
+            'event_join_endtime' => $this->eventJoinEndtime,
+            'event_comments' => $this->eventComments,
+            'event_createUserId' => $this->eventCreateUserId,
+            'event_maxhiker' => $this->eventMaxhiker,
+            'event_gather_location' => $this->eventGatherLocation,
+            'event_gather_time' => $this->eventGatherTime,
+            'event_place_of_departure' => $this->eventPlaceOfDeparture,
+            'event_destination' => $this->eventDestination);
 
         $domain = new Domain_Event();
-        $result = $domain->addEventRe($input);
+        $result = $domain->addEvent($input);
 
-        if ($result!='success') {
+        if ($result != 'success') {
             DI()->logger->debug('fail to comment.');
 
             $rs['code'] = 1;
 //            $rs['msg'] = T('fail to comment.'.$result);
-            $rs['msg'] = 'fail to comment.'.$result;
+            $rs['msg'] = 'fail to comment.' . $result;
             return $rs;
         }
 
@@ -344,6 +374,7 @@ class Api_Event extends PhalApi_Api {
 
         return $rs;
     }
+
     /**
      * 修改活动
      * @desc 修改活动
@@ -351,20 +382,21 @@ class Api_Event extends PhalApi_Api {
      * @return string msg 提示信息
      * ,,
      */
-    public function editEvent() {
+    public function editEvent()
+    {
         $rs = array('code' => 0, 'msg' => '');
         //TODO 更新修改活动信息的处理逻辑
-        $input = array('re_postId' => $this->eventId, 're_createUserId' => $this->userId, 're_modifyUserId' => $this->userId,'re_detail' => $this->userComments);
+        $input = array('re_postId' => $this->eventId, 're_createUserId' => $this->userId, 're_modifyUserId' => $this->userId, 're_detail' => $this->userComments);
 
         $domain = new Domain_Event();
         $result = $domain->addEventRe($input);
 
-        if ($result!='success') {
+        if ($result != 'success') {
             DI()->logger->debug('fail to comment.');
 
             $rs['code'] = 1;
 //            $rs['msg'] = T('fail to comment.'.$result);
-            $rs['msg'] = 'fail to comment.'.$result;
+            $rs['msg'] = 'fail to comment.' . $result;
             return $rs;
         }
 

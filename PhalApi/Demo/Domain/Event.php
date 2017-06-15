@@ -156,6 +156,7 @@ class Domain_Event {
 		return $result;
 	}
 
+	//退出活动
 	public function quit($input) {
 		$result = "";
 		$model_joinlist = new Model_JoinList();
@@ -170,7 +171,7 @@ class Domain_Event {
 		return $result;
 	}
 
-	//
+	//评论活动
 	public function addEventRe($input) {
 		$result = null;
 		$model_bbsre = new Model_BBSre();
@@ -203,5 +204,17 @@ class Domain_Event {
 		}
 		return $result;
 	}
+	//发起活动
+	public function addEvent($input) {
+		$result = null;
+		$model_event = new Model_Event();
+		$result = $model_event -> add($input);
 
+		if (empty($result)) {
+			$result = "发起活动失败！";
+		} else {
+			$result = "success";
+		}
+		return $result;
+	}
 }
