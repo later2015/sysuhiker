@@ -217,4 +217,17 @@ class Domain_Event {
 		}
 		return $result;
 	}
+	//编辑活动
+	public function editEvent($input) {
+		$result = null;
+		$model_event = new Model_Event();
+		$result = $model_event -> edit($input);
+
+		if (empty($result)) {
+			$result = "编辑活动失败！";
+		} else {
+			$result = "success";
+		}
+		return $result;
+	}
 }

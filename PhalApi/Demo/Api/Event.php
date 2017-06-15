@@ -67,7 +67,7 @@ class Api_Event extends PhalApi_Api
                 'eventDestination' => array('name' => 'event_destination', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '目的地'),
             ),//发起活动
             'editEvent' => array(
-                'eventId' => array('name' => 'eventId', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
+                'eventId' => array('name' => 'event_id', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
                 'userId' => array('name' => 'userId', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户id'),
                 'eventName' => array('name' => 'event_name', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动名称'),
                 'eventType' => array('name' => 'event_type', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动类型'),
@@ -328,21 +328,6 @@ class Api_Event extends PhalApi_Api
     {
         $rs = array('code' => 0, 'msg' => '');
         //TODO 更新发起活动的处理逻辑
-//                'eventName' => array('name' => 'event_name', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动名称'),
-//                'eventType' => array('name' => 'event_type', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动类型'),
-//                'eventDetail' => array('name' => 'event_detail', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动详情'),
-//                'eventStarttime' => array('name' => 'event_starttime', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动开始时间'),
-//                'eventEndtime' => array('name' => 'event_endtime', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动结束时间'),
-//                'eventJoinStarttime' => array('name' => 'event_join_starttime', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动报名开始时间'),
-//                'eventJoinEndtime' => array('name' => 'event_join_endtime', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动报名结束时间'),
-//                'eventComments' => array('name' => 'event_comments', 'type' => 'string', 'min' => 0, 'require' => false, 'desc' => '活动备注'),
-//                'eventCreateUserId' => array('name' => 'event_createUserId', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动创建者'),
-//                'eventMaxhiker' => array('name' => 'event_maxhiker', 'type' => 'string', 'min' => 0, 'require' => false, 'desc' => '活动最大人数'),
-//                'eventGatherLocation' => array('name' => 'event_gather_location', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '集合地点'),
-//                'eventGatherTime' => array('name' => 'event_gather_time', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '集合时间'),
-//                'eventPlaceOfDeparture' => array('name' => 'event_place_of_departure', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '出发地'),
-//                'eventDestination' => array('name' => 'event_destination', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '目的地'),
-
         $input = array('event_name' => $this->eventName,
             'event_type' => $this->eventType,
             'event_detail' => $this->eventDetail,
@@ -362,11 +347,10 @@ class Api_Event extends PhalApi_Api
         $result = $domain->addEvent($input);
 
         if ($result != 'success') {
-            DI()->logger->debug('fail to comment.');
+            DI()->logger->debug('fail to add event.');
 
             $rs['code'] = 1;
-//            $rs['msg'] = T('fail to comment.'.$result);
-            $rs['msg'] = 'fail to comment.' . $result;
+            $rs['msg'] = 'fail to add event.' . $result;
             return $rs;
         }
 
@@ -386,17 +370,30 @@ class Api_Event extends PhalApi_Api
     {
         $rs = array('code' => 0, 'msg' => '');
         //TODO 更新修改活动信息的处理逻辑
-        $input = array('re_postId' => $this->eventId, 're_createUserId' => $this->userId, 're_modifyUserId' => $this->userId, 're_detail' => $this->userComments);
+        $input = array('eventId' => $this->eventId,
+            'event_name' => $this->eventName,
+            'event_type' => $this->eventType,
+            'event_detail' => $this->eventDetail,
+            'event_starttime' => $this->eventStarttime,
+            'event_endtime' => $this->eventEndtime,
+            'event_join_starttime' => $this->eventJoinStarttime,
+            'event_join_endtime' => $this->eventJoinEndtime,
+            'event_comments' => $this->eventComments,
+            'event_createUserId' => $this->eventCreateUserId,
+            'event_maxhiker' => $this->eventMaxhiker,
+            'event_gather_location' => $this->eventGatherLocation,
+            'event_gather_time' => $this->eventGatherTime,
+            'event_place_of_departure' => $this->eventPlaceOfDeparture,
+            'event_destination' => $this->eventDestination);
 
         $domain = new Domain_Event();
-        $result = $domain->addEventRe($input);
+        $result = $domain->editEvent($input);
 
         if ($result != 'success') {
-            DI()->logger->debug('fail to comment.');
+            DI()->logger->debug('fail to edit event.');
 
             $rs['code'] = 1;
-//            $rs['msg'] = T('fail to comment.'.$result);
-            $rs['msg'] = 'fail to comment.' . $result;
+            $rs['msg'] = 'fail to edit event.' . $result;
             return $rs;
         }
 

@@ -25,6 +25,17 @@ class Model_Event extends PhalApi_Model_NotORM {
         }
         return $rs;
     }
+    //添加活动
+    //返回ID
+    public function add($input) {
+        $this -> getORM() -> insert($input);
+        return $this -> getORM() -> insert_id();
+    }
+    //编辑活动
+    public function edit($input) {
+        return $this -> getORM() -> where('event_id =?', $input['event_id'])-> update($input);
+    }
+
 
     protected function getTableName($id) {
         return 'info';//pre——fix defines in dbs.php
