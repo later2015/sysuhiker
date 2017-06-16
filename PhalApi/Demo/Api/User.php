@@ -57,6 +57,7 @@ class Api_User extends PhalApi_Api {
      * @return string msg 提示信息
      */
     public function getBaseInfo() {
+        DI()->logger->info('User.getBaseInfo api is call.',$this->userId);
         $rs = array('code' => 0, 'msg' => '', 'info' => array());
 
         $domain = new Domain_User();
@@ -85,6 +86,8 @@ class Api_User extends PhalApi_Api {
         $rs = array('code' => 0, 'msg' => '','userid'=>'');
 		$email=$this->userEmail;
 		$password=$this->userPassword;
+        DI()->logger->info('User.login api is call.',$email);
+
 		//系统框架会自动检查必要的字段输入是否为空
         $domain = new Domain_User();
         $info = $domain->login($email,$password);//登陆成功返回userid
@@ -114,7 +117,8 @@ class Api_User extends PhalApi_Api {
 		'user_nick' => $this->userNick, 'user_gender' => $this->userGender, 'user_address' => $this->userAddress,
 		'user_phone' => $this->userPhone, 'user_urgentname' => $this->userUrgentName, 'user_urgentphone' => $this->userUrgentPhone,
 		'user_qq' => $this->userQQ, 'user_interest' => $this->userInterest, 'user_comments' => $this->userComments);
-		
+        DI()->logger->info('User.register api is call.',$input);
+
         $domain = new Domain_User();
         $info = $domain->register($input);
 
@@ -146,6 +150,9 @@ class Api_User extends PhalApi_Api {
 		'user_nick' => $this->userNick, 'user_gender' => $this->userGender, 'user_address' => $this->userAddress,
 		'user_phone' => $this->userPhone, 'user_urgentname' => $this->userUrgentName, //'user_urgentphone' => $this->userUrgentPhone,
 		'user_qq' => $this->userQQ, 'user_interest' => $this->userInterest, 'user_comments' => $this->userComments);
+
+        DI()->logger->info('User.update api is call.',$input);
+
         $domain = new Domain_User();
         $info = $domain->update($input);
 
@@ -170,6 +177,8 @@ class Api_User extends PhalApi_Api {
      * @return string msg 提示信息
      */
     public function getMultiBaseInfo() {
+        DI()->logger->info('User.getMultiBaseInfo api is call.',$this->userIds);
+
         $rs = array('code' => 0, 'msg' => '', 'list' => array());
 
         $domain = new Domain_User();

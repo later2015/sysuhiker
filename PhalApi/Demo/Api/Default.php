@@ -16,7 +16,7 @@ class Api_Default extends PhalApi_Api {
 	}
 	
 	/**
-	 * 默认接口服务
+	 * Test 接口
 	 * @return string title 标题
 	 * @return string content 内容
 	 * @return string version 版本，格式：X.X.X

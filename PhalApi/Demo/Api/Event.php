@@ -108,6 +108,7 @@ class Api_Event extends PhalApi_Api
      */
     public function getEventInfo()
     {
+        DI()->logger->info('Event.getEventInfo api is call.');
         $rs = array('code' => 0, 'msg' => '', 'info' => array());
 
         $domain = new Domain_Event();
@@ -142,6 +143,7 @@ class Api_Event extends PhalApi_Api
      */
     public function getEventList()
     {
+        DI()->logger->info('Event.getEventList api is call.');
         $rs = array('code' => 0, 'msg' => '', 'list' => array());
 
         $domain = new Domain_Event();
@@ -176,6 +178,7 @@ class Api_Event extends PhalApi_Api
      */
     public function getEventJoinList()
     {
+        DI()->logger->info('Event.getEventJoinList api is call.');
         $rs = array('code' => 0, 'msg' => '', 'list' => array());
 
         $domain = new Domain_Event();
@@ -209,6 +212,7 @@ class Api_Event extends PhalApi_Api
      */
     public function getEventReList()
     {
+        DI()->logger->info('Event.getEventReList api is call.');
         $rs = array('code' => 0, 'msg' => '', 'list' => array());
 
         $domain = new Domain_Event();
@@ -242,6 +246,7 @@ class Api_Event extends PhalApi_Api
             'event_joinlist_insurance' => $this->insurance, 'event_joinlist_usercamp' => $this->usercamp, 'event_joinlist_usercamppad' => $this->usercamppad,
             'event_joinlist_usersleepingbag' => $this->usersleepingbag, 'event_joinlist_userinterphone' => $this->userinterphone, 'event_joinlist_userbag' => $this->userbag,
             'event_joinlist_userBurner' => $this->userBurner, 'event_joinlist_userpot' => $this->userpot, 'event_joinlist_userrole' => $this->userrole);
+        DI()->logger->info('Event.joinEvent api is call.',$input);
 
         $domain = new Domain_Event();
         $result = $domain->joinEvent($input);
@@ -270,6 +275,7 @@ class Api_Event extends PhalApi_Api
     {
         $rs = array('code' => 0, 'msg' => '');
         $input = array('event_joinlist_eventid' => $this->eventId, 'event_joinlist_userid' => $this->userId, 'event_joinlist_comments' => $this->userComments);
+        DI()->logger->info('Event.quit api is call.',$input);
 
         $domain = new Domain_Event();
         $result = $domain->quit($input);
@@ -299,6 +305,7 @@ class Api_Event extends PhalApi_Api
         $rs = array('code' => 0, 'msg' => '');
         $re_orderId = '';//TODO 该排序值需要加上去
         $input = array('re_postId' => $this->eventId, 're_createUserId' => $this->userId, 're_modifyUserId' => $this->userId, 're_detail' => $this->userComments);
+        DI()->logger->info('Event.addEventRe api is call.',$input);
 
         $domain = new Domain_Event();
         $result = $domain->addEventRe($input);
@@ -342,6 +349,7 @@ class Api_Event extends PhalApi_Api
             'event_gather_time' => $this->eventGatherTime,
             'event_place_of_departure' => $this->eventPlaceOfDeparture,
             'event_destination' => $this->eventDestination);
+        DI()->logger->info('Event.addEvent api is call.',$input);
 
         $domain = new Domain_Event();
         $result = $domain->addEvent($input);
@@ -385,6 +393,7 @@ class Api_Event extends PhalApi_Api
             'event_gather_time' => $this->eventGatherTime,
             'event_place_of_departure' => $this->eventPlaceOfDeparture,
             'event_destination' => $this->eventDestination);
+        DI()->logger->info('Event.editEvent api is call.',$input);
 
         $domain = new Domain_Event();
         $result = $domain->editEvent($input);
