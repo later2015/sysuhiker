@@ -208,6 +208,7 @@ class Domain_Event {
 	public function addEvent($input) {
 		$result = null;
 		$model_event = new Model_Event();
+		$input['event_createtime']=date("Y-m-d H:i:s");
 		$result = $model_event -> add($input);
 
 		if (empty($result)) {

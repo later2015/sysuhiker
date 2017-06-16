@@ -327,7 +327,7 @@ class Api_Event extends PhalApi_Api
     public function addEvent()
     {
         $rs = array('code' => 0, 'msg' => '');
-        //TODO 更新发起活动的处理逻辑
+        //发起活动的处理逻辑
         $input = array('event_name' => $this->eventName,
             'event_type' => $this->eventType,
             'event_detail' => $this->eventDetail,
@@ -369,7 +369,7 @@ class Api_Event extends PhalApi_Api
     public function editEvent()
     {
         $rs = array('code' => 0, 'msg' => '');
-        //TODO 更新修改活动信息的处理逻辑
+        //修改活动信息的处理逻辑
         $input = array('eventId' => $this->eventId,
             'event_name' => $this->eventName,
             'event_type' => $this->eventType,
