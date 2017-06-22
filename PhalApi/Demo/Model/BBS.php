@@ -9,6 +9,13 @@ class Model_BBS extends PhalApi_Model_NotORM {
 			->limit($pageflag,$pagesize)
             ->fetchAll();
     }
+    public function getByBBSId($postId) {
+        return $this->getORM()
+            ->select('*')
+            ->where('post_id = ?', $postId)
+            ->fetch();
+    }
+//添加文章
 	public function add($input) {
 		$this -> getORM() -> insert($input);
 		return $this -> getORM() -> insert_id();

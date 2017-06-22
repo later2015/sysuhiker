@@ -201,7 +201,7 @@ class Api_Event extends PhalApi_Api
      * 获取活动评论列表
      * @desc 用于获取活动评论列表
      * @return int code 操作码，0表示成功，1表示获取失败
-     * @return array list 活动列表
+     * @return array list 活动评论列表
      * @return int list[].re_postId 活动的id或者文章的id
      * @return string list[].re_orderId 评论的排序id
      * @return string list[].re_detail 评论内容

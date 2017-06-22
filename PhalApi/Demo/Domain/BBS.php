@@ -13,8 +13,8 @@ class Domain_BBS {
 		}
 
 		// 版本1：简单的获取
-		$model = new Model_Event();
-		$rs = $model -> getByEventId($postId);
+		$model = new Model_BBS();
+		$rs = $model -> getByBBSId($postId);
 
 		// 版本2：使用单点缓存/多级缓存 (应该移至Model层中)
 		/**
@@ -38,7 +38,7 @@ class Domain_BBS {
 
 		$pagesize = intval($pagesize);
 		if ($pagesize <= 0) {
-			$pagesize = 10;
+			$pagesize = 20;
 		}
 		$page = intval($page);
 		if ($page <= 0) {
@@ -46,13 +46,20 @@ class Domain_BBS {
 		}
 		// 版本1：简单的获取
 		$model = new Model_BBS();
-		$rs = $model -> getEventList($pagesize * ($page - 1), $pagesize);
+		$rs = $model -> getBBSList($pagesize * ($page - 1), $pagesize);
 		//第一个参数是偏移量
 
+        //把userID转换成昵称
+        $model2 = new Model_User();
+        foreach ($rs as $key=>$item) {
+            $u = $model2 -> getByUserId($item['post_createUserId']);
+            //$item['re_createUserId']=$u['user_nick'];
+            $rs[$key]['post_createUserNick']=$u['user_nick'];//增加返回用户昵称信息
+        }
 		return $rs;
 	}
 
-	//获取文章评论列表 TODO
+	//获取文章评论列表
 	public function getBBSReList($postid, $page, $pagesize) {
 		$rs = array();
 
@@ -70,12 +77,12 @@ class Domain_BBS {
 		}
 		// 版本1：简单的获取
 		$model = new Model_BBSre();
-		$rs = $model -> getEventReList($postid, $pagesize * ($page - 1), $pagesize);
+		$rs = $model -> getBBSReList($postid, $pagesize * ($page - 1), $pagesize);
 		$model2 = new Model_User();
 		foreach ($rs as $key=>$item) {
 			$u = $model2 -> getByUserId($item['re_createUserId']);
 			//$item['re_createUserId']=$u['user_nick'];
-			$rs[$key]['re_createUserId']=$u['user_nick'];
+			$rs[$key]['re_createUserNick']=$u['user_nick'];
 		}
 
 		return $rs;

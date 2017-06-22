@@ -10,6 +10,15 @@ class Model_BBSre extends PhalApi_Model_NotORM {
 			->limit($pageflag,$pagesize)
             ->fetchAll();
     }
+    //获取茶馆文章评论列表
+    public function getBBSReList($postId,$pageflag,$pagesize) {
+        return $this->getORM()
+            ->select('re_orderId,re_detail,re_createTime,re_createUserId')
+            ->where('re_postId = ? and re_other != "event"', $postId)//re_other 值不为event时表示是茶馆文章的评论
+            ->order('re_orderId asc ')
+            ->limit($pageflag,$pagesize)
+            ->fetchAll();
+    }
 	public function check($input) {
         return $this->getORM()
             ->select('*')
