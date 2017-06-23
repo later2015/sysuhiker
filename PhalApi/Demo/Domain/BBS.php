@@ -88,24 +88,20 @@ class Domain_BBS {
 		return $rs;
 	}
 
-	//评论文章 TODO
-	public function addBBSRe($input) {
+	//评论文章
+	public function addPostRe($input) {
 		$result = null;
 		$model_bbsre = new Model_BBSre();
-		$re_order_id = $model_bbsre -> getEventReOrderId($input['re_postId']);
+		$re_order_id = $model_bbsre -> getPostReOrderId($input['re_postId']);
 
-		$input['re_postId'] = $input['re_postId'];
 		$input['re_orderId'] = $re_order_id['re_orderId'] + 1;
-		$input['re_detail'] = $input['re_detail'];
 		$input['re_createTime'] = date('y-m-d H:i:s', time());
 		//大写H是24进制
-		$input['re_createUserId'] = $input['re_createUserId'];
 		$input['re_modifyTime'] = date('y-m-d H:i:s', time());
-		$input['re_modifyUserId'] = $input['re_modifyUserId'];
 		$input['re_permission'] = '公开';
 		$input['re_up'] = 0;
 		$input['re_down'] = 0;
-		$input['re_other'] = 'event';
+		$input['re_other'] = '';
 
 		$check = $model_bbsre -> check($input);
 		if (empty($check)) {
@@ -122,10 +118,16 @@ class Domain_BBS {
 		return $result;
 	}
 	//发表文章
-	public function addBBS($input) {
+	public function addPost($input) {
 		$result = null;
 		$model_bbs = new Model_BBS();
-		$input['post_createTime']=date("Y-m-d H:i:s");
+		$input['post_createTime']=date("Y-m-d H:i:s", time());
+        $input['post_modifyTime']=date("Y-m-d H:i:s", time());
+        $input['post_up']=0;
+        $input['post_down']=0;
+        $input['post_count']=0;
+        $input['post_countRe']=0;
+        $input['post_other']='';
 		$result = $model_bbs -> add($input);
 
 		if (empty($result)) {
@@ -136,9 +138,10 @@ class Domain_BBS {
 		return $result;
 	}
 	//编辑文章
-	public function editBBS($input) {
+	public function editPost($input) {
 		$result = null;
 		$model_bbs = new Model_BBS();
+        $input['post_modifyTime']=date("Y-m-d H:i:s", time());
 		$result = $model_bbs -> edit($input);
 
 		if (empty($result)) {

@@ -28,6 +28,9 @@ class Model_BBSre extends PhalApi_Model_NotORM {
 	public function getEventReOrderId($eventId) {
 		return $this -> getORM() -> select('re_orderId') -> where('re_postId = ? and re_other="event"', $eventId)->order('re_createTime desc')->limit(1) -> fetch();
 	}
+    public function getPostReOrderId($postId) {
+        return $this -> getORM() -> select('re_orderId') -> where('re_postId = ? and re_other="event"', $postId)->order('re_createTime desc')->limit(1) -> fetch();
+    }
 	public function add($input) {
 		$this -> getORM() -> insert($input);
 		return $this -> getORM() -> insert_id();
