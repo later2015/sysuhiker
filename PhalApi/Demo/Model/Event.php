@@ -10,7 +10,7 @@ class Model_Event extends PhalApi_Model_NotORM {
     }
     public function getEventList($pageflag,$pagesize) {
         return $this->getORM()
-            ->select('event_id,event_name,event_type,event_starttime,event_join_endtime,event_comments')
+            ->select('event_id,event_name,event_type,event_starttime,event_join_endtime,event_createUserId,event_maxhiker,event_comments')
             ->order('event_id desc')
 			->limit($pageflag,$pagesize)
             ->fetchAll();

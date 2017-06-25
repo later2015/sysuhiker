@@ -147,6 +147,12 @@ class Api_Event extends PhalApi_Api
      * @return string list[].event_type 活动类型
      * @return string list[].event_starttime 活动开始时间
      * @return string list[].event_join_endtime 活动报名截止时间
+     * @return string list[].event_createUserId 活动领队的id
+     * @return string list[].event_createUserNick 活动领队的昵称
+     * @return string list[].event_createUserEmail 活动领队的邮件
+     * @return string list[].event_createUserEmail  活动领队的头像
+     * @return string list[].event_maxhiker 活动最大人数限制
+     * @return string list[].event_memberNum 活动已报名人数
      * @return string list[].event_comments 活动备注
      * @return string msg 提示信息
      * ,,
@@ -217,7 +223,8 @@ class Api_Event extends PhalApi_Api
      * @return string list[].re_orderId 评论的排序id
      * @return string list[].re_detail 评论内容
      * @return string list[].re_createTime 评论时间
-     * @return string list[].re_createUserId 评论作者
+     * @return string list[].re_createUserId 评论作者id
+     * @return string list[].re_createUserNick 评论作者昵称
      * @return string msg 提示信息
      * ,,
      */

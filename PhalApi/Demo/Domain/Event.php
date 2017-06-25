@@ -31,6 +31,7 @@ class Domain_Event {
 		return $rs;
 	}
 
+	//获取活动列表
 	public function getEventList($page, $pagesize) {
 		$rs = array();
 
@@ -47,6 +48,17 @@ class Domain_Event {
 		$rs = $model -> getEventList($pagesize * ($page - 1), $pagesize);
 		//第一个参数是偏移量
 
+        $modelUser = new Model_User();
+        $modelJoinList = new Model_JoinList();
+        foreach ($rs as $key=>$item) {
+            //给返回结果加上领队的详细信息
+            $u = $modelUser -> getByUserId($item['event_createUserId']);
+            $rs[$key]['event_createUserNick']=$u['user_nick'];
+            $rs[$key]['event_createUserEmail']=$u['user_email'];
+            $rs[$key]['event_createUserAvatarUrl']=$u['user_avatar_url'];
+            $num = $modelJoinList->getEventJoinCount($item['event_id']);
+            $rs[$key]['event_memberNum']=$num;//已报名人数
+        }
 		return $rs;
 	}
 
@@ -87,8 +99,7 @@ class Domain_Event {
 		$model2 = new Model_User();
 		foreach ($rs as $key=>$item) {
 			$u = $model2 -> getByUserId($item['re_createUserId']);
-			//$item['re_createUserId']=$u['user_nick'];
-			$rs[$key]['re_createUserId']=$u['user_nick'];
+			$rs[$key]['re_createUserNick']=$u['user_nick'];
 		}
 
 		return $rs;

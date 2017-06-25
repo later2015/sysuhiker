@@ -10,6 +10,11 @@ class Model_JoinList extends PhalApi_Model_NotORM {
 			//->limit($pageflag,$pagesize)
             ->fetchAll();
     }
+    public function getEventJoinCount($eventId) {
+        return $this->getORM()
+            ->count('event_joinlist_ID')
+            ->where('event_joinlist_eventid = ?', $eventId);
+    }
 	public function check($input) {
         return $this->getORM()
             ->select('*')
