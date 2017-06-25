@@ -112,8 +112,12 @@ class Api_Event extends PhalApi_Api
      * @return date info.event_join_endtime 活动报名结束时间
      * @return string info.event_comments 活动备注
      * @return date info.event_createtime 活动创建时间
-     * @return string info.event_createUserId 活动创建者
-     * @return int info.event_maxhiker 活动最大人数
+     * @return string info.event_createUserId 活动创建者/活动领队的ID
+     * @return string info.event_createUserNick 活动领队的昵称
+     * @return string info.event_createUserEmail 活动领队的邮件
+     * @return string info.event_createUserAvatarUrl  活动领队的头像
+     * @return string info.event_maxhiker 活动最大人数限制
+     * @return string info.event_memberNum 活动已报名人数
      * @return string msg 提示信息
      */
     public function getEventInfo()
@@ -150,7 +154,7 @@ class Api_Event extends PhalApi_Api
      * @return string list[].event_createUserId 活动领队的id
      * @return string list[].event_createUserNick 活动领队的昵称
      * @return string list[].event_createUserEmail 活动领队的邮件
-     * @return string list[].event_createUserEmail  活动领队的头像
+     * @return string list[].event_createUserAvatarUrl  活动领队的头像
      * @return string list[].event_maxhiker 活动最大人数限制
      * @return string list[].event_memberNum 活动已报名人数
      * @return string list[].event_comments 活动备注
@@ -343,7 +347,6 @@ class Api_Event extends PhalApi_Api
     public function addEventRe()
     {
         $rs = array('code' => 0, 'msg' => '');
-        $re_orderId = '';//TODO 该排序值需要加上去
         $input = array('re_postId' => $this->eventId, 're_createUserId' => $this->userId, 're_modifyUserId' => $this->userId, 're_detail' => $this->userComments);
         DI()->logger->info('Event.addEventRe api is call.',$input);
 
@@ -354,7 +357,6 @@ class Api_Event extends PhalApi_Api
             DI()->logger->debug('fail to comment.');
 
             $rs['code'] = 1;
-//            $rs['msg'] = T('fail to comment.'.$result);
             $rs['msg'] = 'fail to comment.' . $result;
             return $rs;
         }

@@ -14,6 +14,16 @@ class Domain_Event {
 		$model = new Model_Event();
 		$rs = $model -> getByEventId($eventId);
 
+        //给返回结果加上领队的详细信息
+        $modelUser = new Model_User();
+        $modelJoinList = new Model_JoinList();
+        $u = $modelUser -> getByUserId($rs['event_createUserId']);
+        $rs['event_createUserNick']=$u['user_nick'];
+        $rs['event_createUserEmail']=$u['user_email'];
+        $rs['event_createUserAvatarUrl']=$u['user_avatar_url'];
+        $num = $modelJoinList->getEventJoinCount($eventId);
+        $rs['event_memberNum']=$num;//已报名人数
+
 		// 版本2：使用单点缓存/多级缓存 (应该移至Model层中)
 		/**
 		 $model = new Model_User();
