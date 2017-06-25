@@ -71,10 +71,10 @@ class Api_Event extends PhalApi_Api
                 'eventComments' => array('name' => 'event_comments', 'type' => 'string', 'min' => 0, 'require' => false, 'desc' => '活动备注'),
                 'eventCreateUserId' => array('name' => 'event_createUserId', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动创建者'),
                 'eventMaxhiker' => array('name' => 'event_maxhiker', 'type' => 'string', 'min' => 0, 'require' => false, 'desc' => '活动最大人数'),
-                'eventGatherLocation' => array('name' => 'event_gather_location', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '集合地点'),
-                'eventGatherTime' => array('name' => 'event_gather_time', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '集合时间'),
-                'eventPlaceOfDeparture' => array('name' => 'event_place_of_departure', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '出发地'),
-                'eventDestination' => array('name' => 'event_destination', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '目的地'),
+                'eventGatherLocation' => array('name' => 'event_gather_location', 'type' => 'string', 'min' => 0, 'require' => false, 'desc' => '集合地点'),
+                'eventGatherTime' => array('name' => 'event_gather_time', 'type' => 'string', 'min' => 0, 'require' => false, 'desc' => '集合时间'),
+                'eventPlaceOfDeparture' => array('name' => 'event_place_of_departure', 'type' => 'string', 'min' => 0, 'require' => false, 'desc' => '出发地'),
+                'eventDestination' => array('name' => 'event_destination', 'type' => 'string', 'min' => 0, 'require' => false, 'desc' => '目的地'),
             ),//发起活动
             'editEvent' => array(
                 'eventId' => array('name' => 'event_id', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
