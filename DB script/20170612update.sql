@@ -9,3 +9,6 @@ ALTER TABLE event_info
   ADD event_gather_time datetime NULL DEFAULT null COMMENT '集合时间' ,
   ADD event_place_of_departure varchar(200) NULL DEFAULT null COMMENT '出发地' ,
   ADD event_destination varchar(200) NULL DEFAULT null COMMENT '目的地'  ;
+
+ALTER TABLE event_bbs
+  ADD 	post_deleteFlag varchar(1) NULL DEFAULT 'N' COMMENT '删除标识，Y-删除，N-未删除'  ;
