@@ -22,7 +22,10 @@ class Model_JoinList extends PhalApi_Model_NotORM {
 	}
 	public function quit($input) {
 		return $this -> getORM() -> where('event_joinlist_eventid =? and event_joinlist_userid =?', $input['event_joinlist_eventid'],$input['event_joinlist_userid'])-> update($input);
-	}	
+	}
+    public function updateJoinStatus($input) {
+        return $this -> getORM() -> where('event_joinlist_eventid =? and event_joinlist_userid =?', $input['event_joinlist_eventid'],$input['event_joinlist_userid'])-> update($input);
+    }
     protected function getTableName($id) {
         return 'joinlist';//pre——fix defines in dbs.php
     }

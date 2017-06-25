@@ -170,7 +170,18 @@ class Domain_Event {
 		}
 		return $result;
 	}
-
+    //审核活动报名队员状态
+    public function updateJoinStatus($input) {
+        $result = "";
+        $model_joinlist = new Model_JoinList();
+        $result = $model_joinlist -> updateJoinStatus($input);
+        if (empty($result)) {
+            $rs['error'] = "fail to updateJoinStatus";
+        } else {
+            $result = "success";
+        }
+        return $result;
+    }
 	//评论活动
 	public function addEventRe($input) {
 		$result = null;
@@ -204,6 +215,20 @@ class Domain_Event {
 		}
 		return $result;
 	}
+    //编辑活动评论内容
+    public function editEventRe($input) {
+        $result = null;
+        $model_bbsRe = new Model_BBSre();
+        $input['re_modifyTime']=date("Y-m-d H:i:s", time());
+        $result = $model_bbsRe -> edit($input);
+
+        if (empty($result)) {
+            $result = "编辑文章评论失败！";
+        } else {
+            $result = "success";
+        }
+        return $result;
+    }
 	//发起活动
 	public function addEvent($input) {
 		$result = null;

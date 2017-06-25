@@ -44,12 +44,22 @@ class Api_Event extends PhalApi_Api
                 'eventId' => array('name' => 'event_joinlist_eventid', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
                 'userId' => array('name' => 'event_joinlist_userid', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户id'),
                 'userComments' => array('name' => 'event_joinlist_comments', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '备注'),
-            ),//退出活动  
+            ),//退出活动
+            'updateJoinStatus' => array(
+                'eventId' => array('name' => 'event_joinlist_eventid', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
+                'userId' => array('name' => 'event_joinlist_userid', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户id'),
+                'status' => array('name' => 'event_joinlist_status', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '报名状态，活动成员/活动协作/已退出'),
+            ),//审核报名队员的状态
             'addEventRe' => array(
                 'eventId' => array('name' => 'eventId', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
                 'userId' => array('name' => 'userId', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户id'),
                 'userComments' => array('name' => 'userComments', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动评论内容'),
             ),//评论活动
+            'editEventRe' => array(
+                'reId' => array('name' => 're_id', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动评论的ID'),
+                'userComments' => array('name' => 'userComments', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '评论内容'),
+                'userId' => array('name' => 'user_id', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '当前登陆用户ID'),
+            ),//编辑活动评论内容
             'addEvent' => array(
                 'eventName' => array('name' => 'event_name', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动名称'),
                 'eventType' => array('name' => 'event_type', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '活动类型'),
@@ -202,6 +212,7 @@ class Api_Event extends PhalApi_Api
      * @desc 用于获取活动评论列表
      * @return int code 操作码，0表示成功，1表示获取失败
      * @return array list 活动评论列表
+     * @return int list[].re_id 活动评论的id
      * @return int list[].re_postId 活动的id或者文章的id
      * @return string list[].re_orderId 评论的排序id
      * @return string list[].re_detail 评论内容
@@ -262,12 +273,12 @@ class Api_Event extends PhalApi_Api
         $rs['msg'] = "success";
 
         return $rs;
-    }//TODO	
+    }
 
     /**
      * 退出活动
      * @desc 退出活动
-     * @return int code 操作码，0表示成功，1表示获取失败
+     * @return int code 操作码，0表示成功，1表示操作失败
      * @return string msg 提示信息
      * ,,
      */
@@ -276,23 +287,45 @@ class Api_Event extends PhalApi_Api
         $rs = array('code' => 0, 'msg' => '');
         $input = array('event_joinlist_eventid' => $this->eventId, 'event_joinlist_userid' => $this->userId, 'event_joinlist_comments' => $this->userComments);
         DI()->logger->info('Event.quit api is call.',$input);
-
         $domain = new Domain_Event();
         $result = $domain->quit($input);
 
         if ($result != 'success') {
-            DI()->logger->debug('fail to quit.');
+            DI()->logger->info('fail to quit.');
 
             $rs['code'] = 1;
             $rs['msg'] = T('fail to quit.');
             return $rs;
         }
-
         $rs['msg'] = "success";
-
         return $rs;
-    }//TODO	    
+    }
+    /**
+     * 审核活动报名状态
+     * @desc 领导审核活动成员的报名状态，通过 or 不通过
+     * @return int code 操作码，0表示成功，1表示操作失败
+     * @return string msg 提示信息
+     * ,,
+     */
+    public function updateJoinStatus()
+    {
+        $rs = array('code' => 0, 'msg' => '');
+        $input = array('event_joinlist_eventid' => $this->eventId, 'event_joinlist_userid' => $this->userId, 'event_joinlist_status' => $this->status);
+        DI()->logger->info('Event.updateJoinStatus api is call.',$input);
+        $domain = new Domain_Event();
+        $result = $domain->updateJoinStatus($input);
 
+        if ($result != 'success') {
+            DI()->logger->info('fail to updateJoinStatus.');
+
+            $rs['code'] = 1;
+            $rs['msg'] = T('fail to updateJoinStatus.');
+            return $rs;
+        }
+        //TODO 发Email通知用户审核结果
+        $rs['msg'] = "success";
+        return $rs;
+    }
     /**
      * 评论活动
      * @desc 评论活动
@@ -323,7 +356,33 @@ class Api_Event extends PhalApi_Api
 
         return $rs;
     }
+    /**
+     * 编辑活动评论/回复内容
+     * @desc 编辑活动评论/回复内容
+     * @return int code 操作码，0表示成功，1表示失败
+     * @return string msg 提示信息
+     * ,,
+     */
+    public function editEventRe()
+    {
+        $rs = array('code' => 0, 'msg' => '');
+        $input = array('re_id' => $this->reId,
+            're_modifyUserId' => $this->userId,
+            're_detail' => $this->userComments);
+        DI()->logger->info('Event.editEventRe api is call.',$input);
 
+        $domain = new Domain_Event();
+        $result = $domain->editEventRe($input);
+
+        if ($result != 'success') {
+            DI()->logger->debug('fail to edit comment.');
+            $rs['code'] = 1;
+            $rs['msg'] = 'fail to edit comment.' . $result;
+            return $rs;
+        }
+        $rs['msg'] = "success";
+        return $rs;
+    }
     /**
      * 发起活动
      * @desc 发起活动

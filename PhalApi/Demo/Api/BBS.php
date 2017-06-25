@@ -47,6 +47,11 @@ class Api_BBS extends PhalApi_Api
                 'userComments' => array('name' => 'userComments', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '评论内容'),
                 'userId' => array('name' => 'user_id', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '当前登陆用户ID'),
             ),
+            'editPostRe' => array(
+                'reId' => array('name' => 're_id', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '文章评论的ID'),
+                'userComments' => array('name' => 'userComments', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '评论内容'),
+                'userId' => array('name' => 'user_id', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '当前登陆用户ID'),
+            ),
         );
     }
 
@@ -93,6 +98,7 @@ class Api_BBS extends PhalApi_Api
      * @desc 用于获取文章回复评论列表
      * @return int code 操作码，0表示成功，1表示获取失败
      * @return array list 文章评论回复列表
+     * @return int list[].re_id 文章回复/评论的id
      * @return int list[].re_postId 文章的id
      * @return string list[].re_orderId 评论的排序id
      * @return string list[].re_detail 评论内容
@@ -280,7 +286,33 @@ class Api_BBS extends PhalApi_Api
             $rs['msg'] = 'fail to comment.' . $result;
             return $rs;
         }
+        $rs['msg'] = "success";
+        return $rs;
+    }
+    /**
+     * 编辑文章回复
+     * @desc 编辑文章回复
+     * @return int code 操作码，0表示成功，1表示失败
+     * @return string msg 提示信息
+     * ,,
+     */
+    public function editPostRe()
+    {
+        $rs = array('code' => 0, 'msg' => '');
+        $input = array('re_id' => $this->reId,
+            're_modifyUserId' => $this->userId,
+            're_detail' => $this->userComments);
+        DI()->logger->info('Event.editPostRe api is call.',$input);
 
+        $domain = new Domain_BBS();
+        $result = $domain->editPostRe($input);
+
+        if ($result != 'success') {
+            DI()->logger->debug('fail to edit comment.');
+            $rs['code'] = 1;
+            $rs['msg'] = 'fail to edit comment.' . $result;
+            return $rs;
+        }
         $rs['msg'] = "success";
         return $rs;
     }

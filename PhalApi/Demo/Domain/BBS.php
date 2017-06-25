@@ -117,6 +117,20 @@ class Domain_BBS {
 		}
 		return $result;
 	}
+    //编辑文章评论
+    public function editPostRe($input) {
+        $result = null;
+        $model_bbsRe = new Model_BBSre();
+        $input['re_modifyTime']=date("Y-m-d H:i:s", time());
+        $result = $model_bbsRe -> edit($input);
+
+        if (empty($result)) {
+            $result = "编辑文章评论失败！";
+        } else {
+            $result = "success";
+        }
+        return $result;
+    }
 	//发表文章
 	public function addPost($input) {
 		$result = null;
