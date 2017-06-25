@@ -5,6 +5,7 @@ class Model_BBS extends PhalApi_Model_NotORM {
 	public function getBBSList($pageflag,$pagesize) {
         return $this->getORM()
             ->select('post_id,post_title,post_type,post_keywords,post_createTime,post_createUserId,post_modifyTime,post_modifyUserId')
+            ->where('post_deleteFlag = ? ','N')
             ->order('post_id desc ')
 			->limit($pageflag,$pagesize)
             ->fetchAll();
