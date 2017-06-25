@@ -2,7 +2,7 @@
 /**
  * 框架版本号
  */
-defined('PHALAPI_VERSION') || define('PHALAPI_VERSION', '1.3.2');
+defined('PHALAPI_VERSION') || define('PHALAPI_VERSION', '1.4.0');
  
 /**
  * 项目根目录
@@ -47,23 +47,35 @@ class PhalApi {
 ```
      */
     public function response() {
-    	$rs = DI()->response;
-    	
-    	try {
-    		$api = PhalApi_ApiFactory::generateService(); 
-    		
-    		$service = DI()->request->get('service', 'Default.Index');
-    		list($apiClassName, $action) = explode('.', $service);
-				
-        	$rs->setData(call_user_func(array($api, $action)));
-    	} catch (PhalApi_Exception $ex) {
-    		$rs->setRet($ex->getCode());
-        	$rs->setMsg($ex->getMessage());
-    	} catch (Exception $ex) {
-    		throw $ex;
-    	}
-		
-    	return $rs;
+        $rs = DI()->response;
+        try {
+            // 接口调度与响应
+            $api    = PhalApi_ApiFactory::generateService(); 
+            $action = DI()->request->getServiceAction();
+            $data   = call_user_func(array($api, $action));
+
+            $rs->setData($data);
+        } catch (PhalApi_Exception $ex) {
+            // 框架或项目可控的异常
+            $rs->setRet($ex->getCode());
+            $rs->setMsg($ex->getMessage());
+        } catch (Exception $ex) {
+            // 不可控的异常
+            DI()->logger->error(DI()->request->getService(), strval($ex));
+
+            if (DI()->debug) {
+                $rs->setRet($ex->getCode());
+                $rs->setMsg($ex->getMessage());
+                $rs->setDebug('exception', $ex->getTrace());
+            } else {
+                throw $ex;
+            }
+        }
+
+        $rs->setDebug('stack', DI()->tracer->getStack());
+        $rs->setDebug('sqls', DI()->tracer->getSqls());
+
+        return $rs;
     }
     
 }

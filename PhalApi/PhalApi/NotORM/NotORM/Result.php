@@ -150,7 +150,10 @@ class NotORM_Result extends NotORM_Abstract implements Iterator, ArrayAccess, Co
         return $return;
     }
 
-    protected function query($query, $parameters){
+    /**
+     * 放开限制 protected -> public @scott 反馈
+     */
+    public function query($query, $parameters){
         $debugTrace = array();
 
         self::$queryTimes++;
@@ -179,7 +182,7 @@ class NotORM_Result extends NotORM_Abstract implements Iterator, ArrayAccess, Co
                         break;
                     }
                 }
-                error_log("$backtrace[file]:$backtrace[line]:$debug\n", 0);
+                error_log("{$backtrace['file']}:{$backtrace['line']}:$debug\n", 0);
                 //if ($this->notORM->debug) echo "$debug<br />\n";    //@dogstar 2014-10-31
 
                 $debugTrace['sql'] = $debug;
@@ -217,6 +220,7 @@ class NotORM_Result extends NotORM_Abstract implements Iterator, ArrayAccess, Co
             }
         }
 
+        $errorMessage = null;
         if(!$return || !$return->execute()){
 
             $errorInfo = $return->errorInfo();
@@ -229,7 +233,12 @@ class NotORM_Result extends NotORM_Abstract implements Iterator, ArrayAccess, Co
         if($this->notORM->debug){
             $debugTrace['endTime'] = microtime(true);
 
-            echo sprintf("[%s - %ss]%s<br>\n", self::$queryTimes, round($debugTrace['endTime'] - $debugTrace['startTime'], 5), $debugTrace['sql']);
+            $sqlInfo = sprintf("[%s - %sms]%s", 
+                self::$queryTimes, 
+                round(($debugTrace['endTime'] - $debugTrace['startTime']) * 1000, 2), 
+                $debugTrace['sql']
+            );
+            DI()->tracer->sql($sqlInfo);
         }
 
         //显式抛出异常，以让开发同学尽早发现SQL语法问题 @dogstar 20150426
@@ -308,7 +317,7 @@ class NotORM_Result extends NotORM_Abstract implements Iterator, ArrayAccess, Co
             }
             //! driver specific extended insert
             $insert = ($data || $this->notORM->driver == "mysql"
-                ? "(" . implode(", ", array_keys($data)) . ") VALUES " . implode(", ", $values) : "DEFAULT VALUES");
+                ? "(`" . implode("`, `", array_keys($data)) . "`) VALUES " . implode(", ", $values) : "DEFAULT VALUES");
         }
         // requires empty $this->parameters
         $return = $this->query("INSERT INTO $this->table $insert", $parameters);
@@ -335,8 +344,22 @@ class NotORM_Result extends NotORM_Abstract implements Iterator, ArrayAccess, Co
         if(!is_array($data)){
             return $return;
         }
-        if(!isset($data[$this->primary]) && ($id = $this->notORM->connection->lastInsertId($this->notORM->structure->getSequence($this->table)))){
-            $data[$this->primary] = $id;
+
+        // #56 postgresql无法获取新增数据的主键ID @ clov4r-连友 201608
+        if ($this->notORM->driver == "pgsql") {
+            if (!isset($data[$this->primary])) {
+                //获取序列名称
+                $pgss = $this->query("SELECT pg_get_serial_sequence('" . $this->table . "', '" . $this->primary . "') pgss", $this->parameters)->fetch();
+                if (isset($pgss['pgss'])) {
+                    $rs                   = $this->query("select last_value id from " . $pgss['pgss'], $this->parameters)->fetch();
+                    $data[$this->primary] = $rs['id'];
+                    $this->sequence       = $rs['id'];
+                }
+            }
+        } else {
+            if (!isset($data[$this->primary]) && ($id = $this->notORM->connection->lastInsertId($this->notORM->structure->getSequence($this->table)))) {
+                $data[$this->primary] = $id;
+            }
         }
         return new $this->notORM->rowClass($data, $this);
     }
@@ -702,11 +725,7 @@ class NotORM_Result extends NotORM_Abstract implements Iterator, ArrayAccess, Co
      *
      * @return int
      */
-    function count($column = ""){
-        if(!$column){
-            $this->execute();
-            return count($this->data);
-        }
+    function count($column = "*"){
         return $this->aggregation("COUNT($column)");
     }
 

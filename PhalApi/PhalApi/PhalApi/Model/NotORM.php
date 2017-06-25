@@ -13,7 +13,7 @@
  * @author      dogstar <chanzonghuang@gmail.com> 2015-02-22
  */
 
-abstract class PhalApi_Model_NotORM implements PhalApi_Model {
+class PhalApi_Model_NotORM implements PhalApi_Model {
 
     protected static $tableKeys = array();
 
@@ -75,8 +75,21 @@ abstract class PhalApi_Model_NotORM implements PhalApi_Model {
 
     /**
      * 根据主键值返回对应的表名，注意分表的情况
+     * 
+     * 默认表名为：[表前缀] + 全部小写的匹配表名
+     *
+     * 在以下场景下，需要重写此方法以指定表名
+     * + 1. 自动匹配的表名与实际表名不符
+     * + 2. 存在分表 
+     * + 3. Model类名不含有Model_
      */
-    abstract protected function getTableName($id);
+    protected function getTableName($id) {
+        $className = get_class($this);
+        $pos = strpos($className, 'Model');
+
+        $tableName = $pos !== FALSE ? substr($className, $pos + 6) : $className;
+        return strtolower($tableName);
+    }
 
     /**
      * 根据表名获取主键名
@@ -89,17 +102,17 @@ abstract class PhalApi_Model_NotORM implements PhalApi_Model {
      * @return string 主键名
      */
     protected function getTableKey($table) {
-        if (empty(self::$tableKeys)) {
+        if (empty(static::$tableKeys)) {
             $this->loadTableKeys();
         }
 
-        return isset(self::$tableKeys[$table]) ? self::$tableKeys[$table] : self::$tableKeys['__default__'];
+        return isset(static::$tableKeys[$table]) ? static::$tableKeys[$table] : static::$tableKeys['__default__'];
     }
 
     /**
      * 快速获取ORM实例，注意每次获取都是新的实例
      * @param string/int $id
-     * @return NotORM
+     * @return NotORM_Result
      */
     protected function getORM($id = NULL) {
         $table = $this->getTableName($id);
@@ -115,10 +128,10 @@ abstract class PhalApi_Model_NotORM implements PhalApi_Model {
         foreach ($tables as $tableName => $tableConfig) {
             if (isset($tableConfig['start']) && isset($tableConfig['end'])) {
                 for ($i = $tableConfig['start']; $i <= $tableConfig['end']; $i ++) {
-                    self::$tableKeys[$tableName . '_' . $i] = $tableConfig['key'];
+                    static::$tableKeys[$tableName . '_' . $i] = $tableConfig['key'];
                 }
             } else {
-                self::$tableKeys[$tableName] = $tableConfig['key'];
+                static::$tableKeys[$tableName] = $tableConfig['key'];
             }
         }
     }

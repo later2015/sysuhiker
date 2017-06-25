@@ -123,7 +123,7 @@ class PhalApi_DB_NotORM /** implements PhalApi_DB */ {
     }
 
     public function __set($name, $value) {
-        foreach ($this->_notorms as $key => $notorm) {
+        foreach ($this->_notorms as $notorm) {
             $notorm->$name = $value;
         }
     }
@@ -236,8 +236,12 @@ class PhalApi_DB_NotORM /** implements PhalApi_DB */ {
                 $this->_pdos[$dbKey] = $this->createPDOBy($dbCfg);
             } catch (PDOException $ex) {
                 //异常时，接口异常返回，并隐藏数据库帐号信息
-                throw new PhalApi_Exception_InternalServerError(
-                    T('can not connect to database:{db}', array('db' => $dbKey)));
+                $errorMsg = T('can not connect to database: {db}', array('db' => $dbKey));
+                if (DI()->debug) {
+                    $errorMsg = T('can not connect to database: {db}, code: {code}, cause: {msg}', 
+                        array('db' => $dbKey, 'code' => $ex->getCode(), 'msg' => $ex->getMessage()));
+                }
+                throw new PhalApi_Exception_InternalServerError($errorMsg);
             }
         }
 
@@ -274,6 +278,11 @@ class PhalApi_DB_NotORM /** implements PhalApi_DB */ {
         foreach ($this->_pdos as $dbKey => $pdo) {
             $this->_pdos[$dbKey] = NULL;
             unset($this->_pdos[$dbKey]);
+        }
+
+        foreach ($this->_notorms as $notormKey => $notorm) {
+            $this->_notorms[$notormKey] = NULL;
+            unset($this->_notorms[$notormKey]);
         }
     }
 
