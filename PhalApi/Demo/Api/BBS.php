@@ -230,6 +230,34 @@ class Api_BBS extends PhalApi_Api
         return $rs;
     }
     /**
+     * 删除文章
+     * @desc 删除文章
+     * @return int code 操作码，0表示成功，1表示失败
+     * @return string msg 提示信息
+     * ,,
+     */
+    public function deletePost()
+    {
+        $rs = array('code' => 0, 'msg' => '');
+        //修改活动信息的处理逻辑 post_id
+        $input = array('post_id' => $this->postId,
+            'post_modifyUserId' => $this->userId);
+        DI()->logger->info('Event.deletePost api is call.', $input);
+
+        $domain = new Domain_BBS();
+        $result = $domain->deletePost($input);
+
+        if ($result != 'success') {
+            DI()->logger->info('fail to delete post.');
+
+            $rs['code'] = 1;
+            $rs['msg'] = 'fail to delete post.' . $result;
+            return $rs;
+        }
+        $rs['msg'] = "success";
+        return $rs;
+    }
+    /**
      * 评论文章
      * @desc 评论文章
      * @return int code 操作码，0表示成功，1表示失败

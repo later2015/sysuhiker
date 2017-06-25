@@ -151,4 +151,19 @@ class Domain_BBS {
 		}
 		return $result;
 	}
+    //删除文章，将删除标志更新为Y
+    public function deletePost($input) {
+        $result = null;
+        $model_bbs = new Model_BBS();
+        $input['post_modifyTime']=date("Y-m-d H:i:s", time());
+        $input['post_deleteFlag']="Y";
+        $result = $model_bbs -> edit($input);
+
+        if (empty($result)) {
+            $result = "删除文章失败！";
+        } else {
+            $result = "success";
+        }
+        return $result;
+    }
 }
