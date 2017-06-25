@@ -95,9 +95,9 @@ class Domain_BBS {
 		$re_order_id = $model_bbsre -> getPostReOrderId($input['re_postId']);
 
 		$input['re_orderId'] = $re_order_id['re_orderId'] + 1;
-		$input['re_createTime'] = date('y-m-d H:i:s', time());
+		$input['re_createTime'] = date('Y-m-d H:i:s', time());
 		//大写H是24进制
-		$input['re_modifyTime'] = date('y-m-d H:i:s', time());
+		$input['re_modifyTime'] = date('Y-m-d H:i:s', time());
 		$input['re_permission'] = '公开';
 		$input['re_up'] = 0;
 		$input['re_down'] = 0;

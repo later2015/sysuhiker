@@ -139,7 +139,7 @@ class Domain_Event {
 		$input['event_joinlist_declare'] = 'Y';
 		$input['event_joinlist_assessment'] = '60';
 
-		$input['event_joinlist_joindate'] = date('y-m-d H:i:s', time());
+		$input['event_joinlist_joindate'] = date('Y-m-d H:i:s', time());
 		//大写H是24进制
 		if ($input['event_joinlist_usercamp'] == null)
 			$input['event_joinlist_usercamp'] = '0';
@@ -212,10 +212,10 @@ class Domain_Event {
 		$input['re_postId'] = $input['re_postId'];
 		$input['re_orderId'] = $re_order_id['re_orderId'] + 1;
 		$input['re_detail'] = $input['re_detail'];
-		$input['re_createTime'] = date('y-m-d H:i:s', time());
+		$input['re_createTime'] = date('Y-m-d H:i:s', time());
 		//大写H是24进制
 		$input['re_createUserId'] = $input['re_createUserId'];
-		$input['re_modifyTime'] = date('y-m-d H:i:s', time());
+		$input['re_modifyTime'] = date('Y-m-d H:i:s', time());
 		$input['re_modifyUserId'] = $input['re_modifyUserId'];
 		$input['re_permission'] = '公开';
 		$input['re_up'] = 0;

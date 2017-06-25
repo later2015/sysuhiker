@@ -43,13 +43,15 @@ class PhalApi_Filter_SysuhikerMD5 implements PhalApi_Filter {
     }
 
     protected function encryptAppKey($params) {
-        ksort($params);
+        ksort($params);//对参数名进行排序
 
         $paramsStrExceptSign = '';
         foreach ($params as $val) {
             $paramsStrExceptSign .= $val;
         }
-//TODO 加上日期作为salt
-        return md5($paramsStrExceptSign);
+        $date=date('Ymd', time());
+//加上日期作为salt
+        //https://www.phalapi.net/wikis/1-22.html
+        return md5($date.$paramsStrExceptSign);
     }
 }
