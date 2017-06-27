@@ -21,7 +21,7 @@ class Domain_Event {
         $rs['event_createUserNick']=$u['user_nick'];
         $rs['event_createUserEmail']=$u['user_email'];
         $rs['event_createUserAvatarUrl']=$u['user_avatar_url'];
-        $rs2 = $model -> getEventJoinList($eventId);
+        $rs2 = $modelJoinList -> getEventJoinList($eventId);
         //$num = $modelJoinList->getEventJoinCount($eventId);
         $rs['event_memberNum']=count($rs2);//已报名人数
 
@@ -67,7 +67,7 @@ class Domain_Event {
             $rs[$key]['event_createUserNick']=$u['user_nick'];
             $rs[$key]['event_createUserEmail']=$u['user_email'];
             $rs[$key]['event_createUserAvatarUrl']=$u['user_avatar_url'];
-            $rs2 = $model -> getEventJoinList($item['event_id']);
+            $rs2 = $modelJoinList -> getEventJoinList($item['event_id']);
             //$num = $modelJoinList->getEventJoinCount($item['event_id']);//该方法暂时不可用
             $rs[$key]['event_memberNum']=count($rs2);//已报名人数
         }
