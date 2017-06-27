@@ -150,6 +150,7 @@ class Api_Event extends PhalApi_Api
      * @return string list[].event_name 活动名字
      * @return string list[].event_type 活动类型
      * @return string list[].event_starttime 活动开始时间
+     * @return string list[].event_endtime 活动结束时间
      * @return string list[].event_join_endtime 活动报名截止时间
      * @return string list[].event_createUserId 活动领队的id
      * @return string list[].event_createUserNick 活动领队的昵称
