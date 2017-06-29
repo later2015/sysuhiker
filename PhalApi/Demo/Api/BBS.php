@@ -145,6 +145,8 @@ class Api_BBS extends PhalApi_Api
      * @return string info.post_keywords 文章关键字
      * @return string info.post_createTime 文章发表时间
      * @return string info.post_createUserId 文章发表用户ID
+     * @return string info.post_createUserEmail 文章作者email
+     * @return string info.post_createUserAvatarUrl 文章作者头像
      * @return string info.post_modifyTime 文章修改时间
      * @return string info.post_modifyUserId 文章修改用户id
      * @return string msg 提示信息
