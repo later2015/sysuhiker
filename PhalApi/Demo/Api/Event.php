@@ -189,7 +189,10 @@ class Api_Event extends PhalApi_Api
      * @return int code 操作码，0表示成功，1表示获取失败
      * @return array list 活动报名列表
      * @return int list[].event_id 活动ID
+     * @return string list[].event_joinlist_userid 报名者id
      * @return string list[].event_joinlist_usernick 报名者昵称
+     * @return string list[].event_joinlist_useremail 报名者email
+     * @return string list[].event_joinlist_userAvatarUrl 报名者头像
      * @return string list[].event_joinlist_usergender 性别
      * @return string list[].event_joinlist_userrole 角色
      * @return string list[].event_joinlist_joindate 活动报名时间

@@ -4,7 +4,7 @@ class Model_JoinList extends PhalApi_Model_NotORM {
 
     public function getEventJoinList($eventId) {
         return $this->getORM()
-            ->select('event_joinlist_ID,event_joinlist_usernick,event_joinlist_usergender,event_joinlist_userrole,event_joinlist_joindate,event_joinlist_comments,event_joinlist_status')
+            ->select('event_joinlist_ID,event_joinlist_userid,event_joinlist_usernick,event_joinlist_useremail,event_joinlist_usergender,event_joinlist_userrole,event_joinlist_joindate,event_joinlist_comments,event_joinlist_status')
 			->where('event_joinlist_eventid = ?', $eventId)
             ->order('event_joinlist_ID asc')
 			//->limit($pageflag,$pagesize)

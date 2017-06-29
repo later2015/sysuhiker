@@ -85,7 +85,12 @@ class Domain_Event {
 		// 版本1：简单的获取
 		$model = new Model_JoinList();
 		$rs = $model -> getEventJoinList($eventid);
-
+		$modelUser = new Model_User();
+		foreach ($rs as $key=>$item) {
+			//给返回结果加上队员的详细信息
+			$u = $modelUser -> getByUserId($item['event_joinlist_userid']);
+			$rs[$key]['event_joinlist_userAvatarUrl']=$u['user_avatar_url'];
+		}
 		return $rs;
 	}
 
