@@ -67,6 +67,8 @@ class Api_BBS extends PhalApi_Api
      * @return string list[].post_createTime 文章发表时间
      * @return string list[].post_createUserId 文章发表用户ID
      * @return string list[].post_createUserNick 文章发表用户昵称
+     * @return string list[].post_createUserEmail 文章作者email
+     * @return string list[].post_createUserAvatarUrl 文章作者头像
      * @return string list[].post_modifyTime 文章修改时间
      * @return string list[].post_modifyUserId 文章修改用户id
      * @return string msg 提示信息
@@ -105,6 +107,8 @@ class Api_BBS extends PhalApi_Api
      * @return string list[].re_createTime 评论时间
      * @return string list[].re_createUserId 评论作者ID
      * @return string list[].re_createUserNick 评论作者nick
+     * @return string list[].re_createUserEmail 评论者email
+     * @return string list[].re_createUserAvatarUrl 评论者头像
      * @return string msg 提示信息
      * ,,
      */

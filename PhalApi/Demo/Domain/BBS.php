@@ -3,7 +3,7 @@
 class Domain_BBS {
 
     //获取文章详情
-    //TODO　此处应该把各种用户的ID编号转换为用户的具体名字之类的
+    //把各种用户的ID编号转换为用户的具体名字之类的
 	public function getBBSInfo($postId) {
 		$rs = array();
 
@@ -16,6 +16,12 @@ class Domain_BBS {
 		$model = new Model_BBS();
 		$rs = $model -> getByBBSId($postId);
 
+		//把userID转换成昵称
+		$modelUser = new Model_User();
+		$u = $modelUser -> getByUserId($rs['post_createUserId']);
+		$rs['post_createUserNick']=$u['user_nick'];//增加返回用户昵称信息
+		$rs['post_createUserEmail']=$u['user_email'];
+		$rs['post_createUserAvatarUrl']=$u['user_avatar_url'];
 		// 版本2：使用单点缓存/多级缓存 (应该移至Model层中)
 		/**
 		 $model = new Model_User();
@@ -55,6 +61,8 @@ class Domain_BBS {
             $u = $model2 -> getByUserId($item['post_createUserId']);
             //$item['re_createUserId']=$u['user_nick'];
             $rs[$key]['post_createUserNick']=$u['user_nick'];//增加返回用户昵称信息
+			$rs[$key]['post_createUserEmail']=$u['user_email'];
+			$rs[$key]['post_createUserAvatarUrl']=$u['user_avatar_url'];
         }
 		return $rs;
 	}
@@ -83,6 +91,8 @@ class Domain_BBS {
 			$u = $model2 -> getByUserId($item['re_createUserId']);
 			//$item['re_createUserId']=$u['user_nick'];
 			$rs[$key]['re_createUserNick']=$u['user_nick'];
+			$rs[$key]['re_createUserEmail']=$u['user_email'];
+			$rs[$key]['re_createUserAvatarUrl']=$u['user_avatar_url'];
 		}
 
 		return $rs;
