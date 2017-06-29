@@ -233,6 +233,8 @@ class Api_Event extends PhalApi_Api
      * @return string list[].re_createTime 评论时间
      * @return string list[].re_createUserId 评论作者id
      * @return string list[].re_createUserNick 评论作者昵称
+     * @return string list[].re_createUserEmail 评论者email
+     * @return string list[].re_createUserAvatarUrl 评论者头像
      * @return string msg 提示信息
      * ,,
      */

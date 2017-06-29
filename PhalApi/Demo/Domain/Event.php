@@ -117,6 +117,8 @@ class Domain_Event {
 		foreach ($rs as $key=>$item) {
 			$u = $model2 -> getByUserId($item['re_createUserId']);
 			$rs[$key]['re_createUserNick']=$u['user_nick'];
+			$rs[$key]['re_createUserEmail']=$u['user_email'];
+			$rs[$key]['re_createUserAvatarUrl']=$u['user_avatar_url'];
 		}
 
 		return $rs;
