@@ -60,8 +60,9 @@ cp ./PhalApi-Library/UCloud/ ./PhalApi/Library/ -R
 ```
 ### 2.入门使用
 #### 2.1 入口注册
+我们需要在 ./PhalApi/Public/init.php 中追加配置 
 ```
-$loader->addDirs('Library');
+$loader->addDirs('Library'); //如果已添加该目录则不需要重复添加
 
 //其他代码...
 
