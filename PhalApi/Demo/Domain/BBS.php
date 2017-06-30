@@ -97,7 +97,18 @@ class Domain_BBS {
 
 		return $rs;
 	}
-
+    //获取文章评论总数
+    public function getBBSReCount($postid) {
+        $rs = array();
+        $postid = intval($postid);
+        if ($postid <= 0) {
+            return $rs;
+        }
+        // 版本1：简单的获取
+        $model = new Model_BBSre();
+        $rs = $model -> getReList($postid);
+        return count($rs);
+    }
 	//评论文章
 	public function addPostRe($input) {
 		$result = null;
