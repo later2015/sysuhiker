@@ -73,7 +73,13 @@ class Domain_Event {
         }
 		return $rs;
 	}
-
+    //查询活动总数
+    public function getEventCount($page, $pagesize) {
+        // 版本1：简单的获取
+        $model = new Model_Event();
+        $rs = $model -> getEventCount();
+        return $rs;
+    }
 	//获取活动报名名单
 	public function getEventJoinList($eventid) {
 		$rs = array();

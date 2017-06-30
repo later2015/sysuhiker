@@ -15,7 +15,11 @@ class Model_Event extends PhalApi_Model_NotORM {
 			->limit($pageflag,$pagesize)
             ->fetchAll();
     }
-
+    //查询活动总数
+    public function getEventCount() {
+        return $this->getORM()
+            ->count('*');
+    }
     public function getByEventIdWithCache($eventId) {
         $key = 'userbaseinfo_' . $eventId;
         $rs = DI()->cache->get($key);

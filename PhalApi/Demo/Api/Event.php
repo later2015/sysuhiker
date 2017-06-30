@@ -159,6 +159,9 @@ class Api_Event extends PhalApi_Api
      * @return string list[].event_maxhiker 活动最大人数限制
      * @return string list[].event_memberNum 活动已报名人数
      * @return string list[].event_comments 活动备注
+     * @return int pagesize 每页记录
+     * @return int page 页码
+     * @return int totalCount 总记录
      * @return string msg 提示信息
      * ,,
      */
@@ -179,7 +182,9 @@ class Api_Event extends PhalApi_Api
         }
 
         $rs['list'] = $list;
-
+        $rs['pagesize'] = $this->pagesize;
+        $rs['page'] = $this->page;
+        $rs['totalCount'] = $domain->getEventCount();//查询总活动数
         return $rs;
     }
 
