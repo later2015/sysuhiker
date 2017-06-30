@@ -8,6 +8,9 @@ class Model_Event extends PhalApi_Model_NotORM {
             ->where('event_id = ?', $eventId)
             ->fetch();
     }
+    //TODO 改成关联查询？
+    //参考 https://www.phalapi.net/wikis/1-15.html
+    //https://www.phalapi.net/wikis/1-20.html
     public function getEventList($pageflag,$pagesize) {
         return $this->getORM()
             ->select('event_id,event_name,event_type,event_starttime,event_endtime,event_join_endtime,event_createUserId,event_maxhiker,event_comments')
