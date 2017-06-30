@@ -235,6 +235,9 @@ class Api_Event extends PhalApi_Api
      * @return string list[].re_createUserNick 评论作者昵称
      * @return string list[].re_createUserEmail 评论者email
      * @return string list[].re_createUserAvatarUrl 评论者头像
+     * @return int pagesize 每页记录
+     * @return int page 页码
+     * @return int totalCount 总记录
      * @return string msg 提示信息
      * ,,
      */
@@ -255,7 +258,10 @@ class Api_Event extends PhalApi_Api
         }
 
         $rs['list'] = $list;
-
+        $rs['pagesize'] = $this->pagesize;
+        $rs['page'] = $this->page;
+        $rs['totalCount'] = $domain->getEventReCount($this->eventId);
+        //$rs['totalPage'] = $this->page;
         return $rs;
     }
 

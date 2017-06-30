@@ -19,6 +19,14 @@ class Model_BBSre extends PhalApi_Model_NotORM {
             ->limit($pageflag,$pagesize)
             ->fetchAll();
     }
+    //获取某篇文章的评论ID列表,用以计算总数
+    public function getReList($postId) {
+        return $this->getORM()
+            ->select('re_id')
+            ->where('re_postId = ?', $postId)
+            ->order('re_id asc ')
+            ->fetchAll();
+    }
 	public function check($input) {
         return $this->getORM()
             ->select('*')

@@ -123,7 +123,18 @@ class Domain_Event {
 
 		return $rs;
 	}
-
+    //获取活动评论总数
+    public function getEventReCount($eventid) {
+        $rs = array();
+        $eventid = intval($eventid);
+        if ($eventid <= 0) {
+            return $rs;
+        }
+        // 版本1：简单的获取
+        $model = new Model_BBSre();
+        $rs = $model -> getReList($eventid);
+        return count($rs);
+    }
 	public function joinEvent($input) {
 		$result = null;
 		$model = new Model_User();
