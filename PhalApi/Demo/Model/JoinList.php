@@ -11,11 +11,11 @@ class Model_JoinList extends PhalApi_Model_NotORM {
             ->fetchAll();
     }
 
-    //TODO 该方法有问题
+    //TODO 该方法可能有问题，待测试。
     public function getEventJoinCount($eventId) {
         return $this->getORM()
-            ->count('event_joinlist_ID')
-            ->where('event_joinlist_eventid = ?', $eventId);
+            ->where('event_joinlist_eventid = ?', $eventId)
+            ->count('event_joinlist_ID');
     }
 
 	public function check($input) {

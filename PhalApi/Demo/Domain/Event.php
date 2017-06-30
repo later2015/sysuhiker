@@ -21,10 +21,12 @@ class Domain_Event {
         $rs['event_createUserNick']=$u['user_nick'];
         $rs['event_createUserEmail']=$u['user_email'];
         $rs['event_createUserAvatarUrl']=$u['user_avatar_url'];
-        $rs2 = $modelJoinList -> getEventJoinList($eventId);
-        //$num = $modelJoinList->getEventJoinCount($eventId);
-        $rs['event_memberNum']=count($rs2);//已报名人数
 
+        //$rs2 = $modelJoinList -> getEventJoinList($eventId);
+        //$rs['event_memberNum']=count($rs2);//已报名人数
+
+        $num = $modelJoinList->getEventJoinCount($eventId);
+        $rs['event_memberNum']=$num;//已报名人数
 		// 版本2：使用单点缓存/多级缓存 (应该移至Model层中)
 		/**
 		 $model = new Model_User();
@@ -67,9 +69,11 @@ class Domain_Event {
             $rs[$key]['event_createUserNick']=$u['user_nick'];
             $rs[$key]['event_createUserEmail']=$u['user_email'];
             $rs[$key]['event_createUserAvatarUrl']=$u['user_avatar_url'];
-            $rs2 = $modelJoinList -> getEventJoinList($item['event_id']);
-            //$num = $modelJoinList->getEventJoinCount($item['event_id']);//该方法暂时不可用
-            $rs[$key]['event_memberNum']=count($rs2);//已报名人数
+            //$rs2 = $modelJoinList -> getEventJoinList($item['event_id']);
+            //$rs[$key]['event_memberNum']=count($rs2);//已报名人数
+
+            $num = $modelJoinList->getEventJoinCount($item['event_id']);//该方法暂时不可用
+            $rs[$key]['event_memberNum']=$num;//已报名人数
         }
 		return $rs;
 	}
