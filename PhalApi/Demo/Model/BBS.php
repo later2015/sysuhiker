@@ -10,6 +10,12 @@ class Model_BBS extends PhalApi_Model_NotORM {
 			->limit($pageflag,$pagesize)
             ->fetchAll();
     }
+    //查询文章总数
+    public function getBBSCount() {
+        return $this->getORM()
+            ->count('*');
+    }
+
     public function getByBBSId($postId) {
         return $this->getORM()
             ->select('*')

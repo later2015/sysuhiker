@@ -66,6 +66,13 @@ class Domain_BBS {
         }
 		return $rs;
 	}
+    //查询文章总数
+    public function getBBSCount($page, $pagesize) {
+        // 版本1：简单的获取
+        $model = new Model_BBS();
+        $rs = $model -> getBBSCount();
+        return $rs;
+    }
 
 	//获取文章评论列表
 	public function getBBSReList($postid, $page, $pagesize) {

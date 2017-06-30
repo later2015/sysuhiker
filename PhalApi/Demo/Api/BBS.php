@@ -71,6 +71,9 @@ class Api_BBS extends PhalApi_Api
      * @return string list[].post_createUserAvatarUrl 文章作者头像
      * @return string list[].post_modifyTime 文章修改时间
      * @return string list[].post_modifyUserId 文章修改用户id
+     * @return int pagesize 每页记录
+     * @return int page 页码
+     * @return int totalCount 总记录
      * @return string msg 提示信息
      * ,,
      */
@@ -91,7 +94,9 @@ class Api_BBS extends PhalApi_Api
         }
 
         $rs['list'] = $list;
-
+        $rs['pagesize'] = $this->pagesize;
+        $rs['page'] = $this->page;
+        $rs['totalCount'] = $domain->getBBSCount();//查询总文章数
         return $rs;
     }
 
