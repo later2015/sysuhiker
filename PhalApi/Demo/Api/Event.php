@@ -333,6 +333,7 @@ class Api_Event extends PhalApi_Api
      * @desc 领导审核活动成员的报名状态，通过 or 不通过
      * @return int code 操作码，0表示成功，1表示操作失败
      * @return string msg 提示信息
+     * @return string emailStatus 用户邮件状态，success 审核通知邮件发送成功。 fail-发送失败
      * ,,
      */
     public function updateJoinStatus()
@@ -344,13 +345,34 @@ class Api_Event extends PhalApi_Api
         $result = $domain->updateJoinStatus($input);
 
         if ($result != 'success') {
-            DI()->logger->info('fail to updateJoinStatus.');
+            DI()->logger->error('fail to updateJoinStatus.');
 
             $rs['code'] = 1;
             $rs['msg'] = T('fail to updateJoinStatus.');
             return $rs;
         }
-        //TODO 发Email通知用户审核结果
+
+        //发Email通知用户审核结果
+        $user = new Domain_User();
+        $info = $user->getBaseInfo($this->userId);
+        $to = $info["user_email"];// 用户注册的邮箱
+        $subject = "$to 被领队审核为 $this->status";
+        $URL = "http://sysuhiker.cc/joinlist.php?eventId=$this->eventId";
+        $message = "尊敬的用户:$to  \r\n你在逸仙徒步活动平台报名的活动已经被领队审核，审核结果是：$this->status \r\n   本邮件是系统通知邮件，有什么疑问请咨询领队，请勿咨询本邮箱。 \r\n活动详情：" . $URL;
+
+        $mail = new EmailUtil();
+        $ret = $mail -> sendEmail($to, $subject, $message);
+        if ($ret === TRUE)//php 中 mail() 函数用来发送邮件，需要更改 php.ini 文件，最好安装 SMTP 服务器
+        {
+            DI()->logger->info( "审核结果通知邮件已发送。");
+            $rs['emailStatus']="success";
+        } else {
+            //发送失败时输出错误码和错误信息
+            DI()->logger->error("Error Code:".$mail -> errno()." Error Msg:". $mail -> errmsg());
+            $rs['emailStatus']="fail";
+        }
+        $mail -> clean();
+
         $rs['msg'] = "success";
         return $rs;
     }
