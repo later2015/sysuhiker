@@ -6,7 +6,7 @@ class Api_User extends PhalApi_Api {
         return array(
             'getBaseInfo' => array(
                 'userId' => array('name' => 'user_id', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户ID'),
-            ),//userId是php里面的参数名，user_id是URL里的参数。TODO 登陆，修改个人信息，注册，重置密码
+            ),//userId是php里面的参数名，user_id是URL里的参数。
             'login' => array(
                 'userEmail' => array('name' => 'user_email', 'type' => 'string', 'min' => 5, 'require' => true, 'desc' => '用户email'),
                 'userPassword' => array('name' => 'user_psw', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '用户密码'),
@@ -29,16 +29,16 @@ class Api_User extends PhalApi_Api {
                 'userId' => array('name' => 'user_id', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户ID'),
                 'userEmail' => array('name' => 'user_email', 'type' => 'string', 'min' => 5, 'require' => true, 'desc' => '用户email'),
                 'userPassword' => array('name' => 'user_psw', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '用户密码'),
-                'userName' => array('name' => 'user_name', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '真实姓名'),
-                'userNick' => array('name' => 'user_nick', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '用户昵称'),
-                'userGender' => array('name' => 'user_gender', 'type' => 'string', 'min' => 2, 'require' => true, 'desc' => '性别'),
-                'userAddress' => array('name' => 'user_address', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => '住址'),   
-                'userPhone' => array('name' => 'user_phone', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '电话'),   
-                'userUrgentName' => array('name' => 'user_urgentname', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '紧急联系人'),   
-                'userUrgentPhone' => array('name' => 'user_urgentphone', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '紧急联系人电话'),  
-                'userQQ' => array('name' => 'user_qq', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => 'QQ'), 
-                'userInterest' => array('name' => 'user_interest', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => '兴趣领域'),  
-                'userComments' => array('name' => 'user_comments', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => '备注'),    
+                'userName' => array('name' => 'user_name', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '真实姓名'),
+                'userNick' => array('name' => 'user_nick', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '用户昵称'),
+                'userGender' => array('name' => 'user_gender', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '性别'),
+                'userAddress' => array('name' => 'user_address', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '住址'),
+                'userPhone' => array('name' => 'user_phone', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '电话'),
+                'userUrgentName' => array('name' => 'user_urgentname', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '紧急联系人'),
+                'userUrgentPhone' => array('name' => 'user_urgentphone', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '紧急联系人电话'),
+                'userQQ' => array('name' => 'user_qq', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => 'QQ'),
+                'userInterest' => array('name' => 'user_interest', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '兴趣领域'),
+                'userComments' => array('name' => 'user_comments', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '备注'),
             ),//用户修改个人资料
             'getMultiBaseInfo' => array(
                 'userIds' => array('name' => 'user_ids', 'type' => 'array', 'format' => 'explode', 'require' => true, 'desc' => '用户ID，多个以逗号分割'),
