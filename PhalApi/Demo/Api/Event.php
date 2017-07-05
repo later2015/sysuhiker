@@ -435,6 +435,7 @@ class Api_Event extends PhalApi_Api
      * 发起活动
      * @desc 发起活动
      * @return int code 操作码，0表示成功，1表示失败
+     * @return int eventId 活动编号
      * @return string msg 提示信息
      * ,,
      */
@@ -461,14 +462,15 @@ class Api_Event extends PhalApi_Api
         $domain = new Domain_Event();
         $result = $domain->addEvent($input);
 
-        if ($result != 'success') {
+
+        if ($result == 'fail') {
             DI()->logger->debug('fail to add event.');
 
             $rs['code'] = 1;
             $rs['msg'] = 'fail to add event.' . $result;
             return $rs;
         }
-
+        $rs['eventId']=$result;
         $rs['msg'] = "success";
 
         return $rs;

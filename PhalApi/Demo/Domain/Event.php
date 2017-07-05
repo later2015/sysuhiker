@@ -288,11 +288,9 @@ class Domain_Event {
 		$result = $model_event -> add($input);
 
 		if (empty($result)) {
-			$result = "发起活动失败！";
-		} else {
-			$result = "success";
+			$result = "fail";
 		}
-		return $result;
+		return $result;//成功返回ID
 	}
 	//编辑活动
 	public function editEvent($input) {
