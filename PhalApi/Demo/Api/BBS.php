@@ -14,6 +14,7 @@ class Api_BBS extends PhalApi_Api
             'getBBSList' => array(
                 'pagesize' => array('name' => 'pagesize', 'type' => 'int', 'min' => 1, 'require' => FALSE, 'desc' => '每页文章数'),
                 'page' => array('name' => 'page', 'type' => 'int', 'min' => 1, 'require' => FALSE, 'desc' => '页数'),
+                'postType' => array('name' => 'post_type', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '文章类型,全部则传all或者不传'),
             ),
             'getBBSReList' => array(
                 'postId' => array('name' => 'post_id', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '文章ID'),
@@ -83,7 +84,7 @@ class Api_BBS extends PhalApi_Api
         $rs = array('code' => 0, 'msg' => '', 'list' => array());
 
         $domain = new Domain_BBS();
-        $list = $domain->getBBSList($this->page, $this->pagesize);
+        $list = $domain->getBBSList($this->page, $this->pagesize,$this->postType);
 
         if (empty($list)) {
             DI()->logger->info('event list not found');
