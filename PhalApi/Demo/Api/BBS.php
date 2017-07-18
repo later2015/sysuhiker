@@ -72,6 +72,8 @@ class Api_BBS extends PhalApi_Api
      * @return string list[].post_createUserAvatarUrl 文章作者头像
      * @return string list[].post_modifyTime 文章修改时间
      * @return string list[].post_modifyUserId 文章修改用户id
+     * @return string list[].post_modifyUserNick 文章修改用户nick
+     * @return string list[].post_countRe  文章回复次数统计
      * @return int pagesize 每页记录
      * @return int page 页码
      * @return int totalCount 总记录
