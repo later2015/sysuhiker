@@ -66,6 +66,9 @@ class Domain_BBS
             $rs[$key]['post_createUserNick'] = $u['user_nick'];//增加返回用户昵称信息
             $rs[$key]['post_createUserEmail'] = $u['user_email'];
             $rs[$key]['post_createUserAvatarUrl'] = $u['user_avatar_url'];
+
+            $mu = $model2->getByUserId($item['post_modifyUserId']);
+            $rs[$key]['post_modifyUserNick'] = $mu['user_nick'];//增加返回用户昵称信息
         }
         return $rs;
     }

@@ -5,16 +5,17 @@ class Model_BBS extends PhalApi_Model_NotORM
 
     public function getBBSList($pageflag, $pagesize, $postType = 'all')
     {
+        $item='post_id,post_title,post_type,post_keywords,post_createTime,post_createUserId,post_modifyTime,post_modifyUserId,post_countRe';
         if ($postType == 'all' || $postType == '全部') {
             return $this->getORM()
-                ->select('post_id,post_title,post_type,post_keywords,post_createTime,post_createUserId,post_modifyTime,post_modifyUserId')
+                ->select($item)
                 ->where('post_deleteFlag = ? ', 'N')
                 ->order('post_id desc ')
                 ->limit($pageflag, $pagesize)
                 ->fetchAll();
         } else {
             return $this->getORM()
-                ->select('post_id,post_title,post_type,post_keywords,post_createTime,post_createUserId,post_modifyTime,post_modifyUserId')
+                ->select($item)
                 ->where('post_deleteFlag = ? and post_type = ?', 'N', $postType)
                 ->order('post_id desc ')
                 ->limit($pageflag, $pagesize)
