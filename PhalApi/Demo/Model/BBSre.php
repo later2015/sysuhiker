@@ -4,7 +4,7 @@ class Model_BBSre extends PhalApi_Model_NotORM {
 
 	public function getEventReList($eventId,$pageflag,$pagesize) {
         return $this->getORM()
-            ->select('re_orderId,re_detail,re_createTime,re_createUserId')
+            ->select('re_id,re_orderId,re_detail,re_createTime,re_createUserId')
 			->where('re_postId = ? and re_other = "event"', $eventId)//re_other 值为event时表示是活动的评论
             ->order('re_id asc ')
 			->limit($pageflag,$pagesize)
