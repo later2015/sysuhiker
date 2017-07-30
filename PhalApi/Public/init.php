@@ -11,6 +11,7 @@ defined('API_ROOT') || define('API_ROOT', dirname(__FILE__) . '/..');
 
 require_once API_ROOT . '/PhalApi/PhalApi.php';
 $loader = new PhalApi_Loader(API_ROOT, 'Library');
+$loader->loadFile('../SAE/emailUtil.class.php');//引入了才能在api文件夹里对应的地方自动加载
 //$loader->addDirs('Library'); //这句不用加，上面已经add了这个目录了。
 /** ---------------- 注册&初始化 基本服务组件 ---------------- **/
 
