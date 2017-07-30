@@ -462,7 +462,6 @@ class Api_Event extends PhalApi_Api
         $domain = new Domain_Event();
         $result = $domain->addEvent($input);
 
-
         if ($result == 'fail') {
             DI()->logger->debug('fail to add event.');
 
