@@ -290,8 +290,7 @@ class Domain_Event {
 		if (empty($result)) {
 			$result = "fail";
 		}else{
-			//TODO 需要把活动发起人加入joinList
-			//$eventinfo = $model_event -> getByEventId($input['event_joinlist_eventid']);
+			//把活动发起人加入joinList
 			$modelUser = new Model_User();
 			$userinfo = $modelUser -> getByUserId($input['event_createUserId']);
             $joinInput['event_joinlist_eventid']=$result;
