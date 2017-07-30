@@ -6,7 +6,7 @@ class Model_BBSre extends PhalApi_Model_NotORM {
         return $this->getORM()
             ->select('re_orderId,re_detail,re_createTime,re_createUserId')
 			->where('re_postId = ? and re_other = "event"', $eventId)//re_other 值为event时表示是活动的评论
-            ->order('re_orderId asc ')
+            ->order('re_id asc ')
 			->limit($pageflag,$pagesize)
             ->fetchAll();
     }
@@ -15,7 +15,7 @@ class Model_BBSre extends PhalApi_Model_NotORM {
         return $this->getORM()
             ->select('re_id,re_postId,re_orderId,re_detail,re_createTime,re_createUserId')
             ->where('re_postId = ? and re_other != "event"', $postId)//re_other 值不为event时表示是茶馆文章的评论
-            ->order('re_orderId asc ')
+            ->order('re_id asc ')
             ->limit($pageflag,$pagesize)
             ->fetchAll();
     }
