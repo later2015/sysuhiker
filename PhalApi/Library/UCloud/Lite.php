@@ -35,7 +35,7 @@ class UCloud_Lite {
     private $upload_file;
 
     //文件存储的默认路径
-    private $default_path = 'upload/imgUpload';
+    private $default_path = 'imgUpload';//local.php里已经把根目录里已经定好了在upload目录
 
     //文件存储路径
     private $save_path;

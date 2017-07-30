@@ -22,6 +22,7 @@ return array(
      */
     'UCloud' => array(
         //对应的文件host根路径,子目录在lite.php里配置
-        'host' => 'http://sysuhiker.cc/'
+        'host' => 'http://sysuhiker.cc/upload'//for prod
+        //'host' => 'http://localhost:10080/upload' //for local//这个值主要用来在接口返回时路径的拼装
     ),
 );

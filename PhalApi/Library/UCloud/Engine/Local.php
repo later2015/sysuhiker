@@ -11,7 +11,8 @@ class UCloud_Engine_Local{
      * 上传文件根目录
      * @var string
      */
-    private $rootPath = '../upload/';
+    //private $rootPath = '../upload/';//该方法的根目录是api接口的根目录
+    private $rootPath = '../../upload/';//接口上一层，网站的根目录
 
     /**
      * 本地上传错误信息

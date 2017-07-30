@@ -31,7 +31,7 @@ class Api_Upload extends PhalApi_Api
 
     /**
      * 上传图片文件
-     * @return string $url 绝对路径
+     * @return string $url 绝对路径，路径的前缀在本地测试时需要把Config/app.php里的sysuhiker.cc/upload配置改成本地地址。
      * @return string $file 相对路径，用于保存至数据库，按项目情况自己决定吧
      */
     public function upload()
