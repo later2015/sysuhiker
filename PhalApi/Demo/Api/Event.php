@@ -486,7 +486,7 @@ class Api_Event extends PhalApi_Api
     {
         $rs = array('code' => 0, 'msg' => '');
         //修改活动信息的处理逻辑
-        $input = array('eventId' => $this->eventId,
+        $input = array('event_id' => $this->eventId,
             'event_name' => $this->eventName,
             'event_type' => $this->eventType,
             'event_detail' => $this->eventDetail,
