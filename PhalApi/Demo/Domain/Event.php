@@ -293,45 +293,32 @@ class Domain_Event {
 			//TODO 需要把活动发起人加入joinList
 			//$eventinfo = $model_event -> getByEventId($input['event_joinlist_eventid']);
 			$modelUser = new Model_User();
-			$userinfo = $modelUser -> getByUserId($input['event_joinlist_userid']);
+			$userinfo = $modelUser -> getByUserId($input['event_createUserId']);
             $joinInput['event_joinlist_eventid']=$result;
             $joinInput['event_joinlist_username'] = $userinfo['user_name'];
             $joinInput['event_joinlist_usernick'] = $userinfo['user_nick'];
             $joinInput['event_joinlist_eventname'] = $input['event_name'];
-			if ($joinInput['event_joinlist_userrole'] == null)
-                $joinInput['event_joinlist_userrole'] = $userinfo['user_interest'];
+            $joinInput['event_joinlist_userrole'] = $userinfo['user_interest'];
             $joinInput['event_joinlist_userpsw'] = 'NONE';
             $joinInput['event_joinlist_useremail'] = $userinfo['user_email'];
-			if ($joinInput['event_joinlist_qq'] == null)
-                $joinInput['event_joinlist_qq'] = $userinfo['user_qq'];
+            $joinInput['event_joinlist_qq'] = $userinfo['user_qq'];
             $joinInput['event_joinlist_weiboName'] = $userinfo['user_weiboName'];
             $joinInput['event_joinlist_weiboLink'] = $userinfo['user_weiboLink'];
-			if ($joinInput['event_joinlist_useraddress'] == null)
-                $joinInput['event_joinlist_useraddress'] = $userinfo['user_address'];
-			if ($joinInput['event_joinlist_insurance'] == null)
-                $joinInput['event_joinlist_insurance'] = '';
+            $joinInput['event_joinlist_useraddress'] = $userinfo['user_address'];
+            $joinInput['event_joinlist_insurance'] = '';
             $joinInput['event_joinlist_declare'] = 'Y';
             $joinInput['event_joinlist_assessment'] = '60';
-
             $joinInput['event_joinlist_joindate'] = date('Y-m-d H:i:s', time());
 			//大写H是24进制
-			if ($joinInput['event_joinlist_usercamp'] == null)
-                $joinInput['event_joinlist_usercamp'] = '0';
-			if ($joinInput['event_joinlist_usercamppad'] == null)
-                $joinInput['event_joinlist_usercamppad'] = '0';
-			if ($joinInput['event_joinlist_usersleepingbag'] == null)
-                $joinInput['event_joinlist_usersleepingbag'] = 'N';
-			if ($joinInput['event_joinlist_userinterphone'] == null)
-                $joinInput['event_joinlist_userinterphone'] = 'N';
-			if ($joinInput['event_joinlist_userbag'] == null)
-                $joinInput['event_joinlist_userbag'] = '0';
-			if ($joinInput['event_joinlist_userBurner'] == null)
-                $joinInput['event_joinlist_userBurner'] = 'N';
-			if ($joinInput['event_joinlist_userpot'] == null)
-                $joinInput['event_joinlist_userpot'] = '0';
-			if ($joinInput['event_joinlist_comments'] == null)
-                $joinInput['event_joinlist_comments'] = '无';
-
+            //以下是领队的默认露营装备信息，为空。
+            $joinInput['event_joinlist_usercamp'] = '0';
+            $joinInput['event_joinlist_usercamppad'] = '0';
+            $joinInput['event_joinlist_usersleepingbag'] = 'N';
+            $joinInput['event_joinlist_userinterphone'] = 'N';
+            $joinInput['event_joinlist_userbag'] = '0';
+            $joinInput['event_joinlist_userBurner'] = 'N';
+            $joinInput['event_joinlist_userpot'] = '0';
+            $joinInput['event_joinlist_comments'] = '无';
 
 			$model_joinlist = new Model_JoinList();
 			$check = $model_joinlist -> check($joinInput);
@@ -341,7 +328,6 @@ class Domain_Event {
 				return $result = "already join";
 			}
 		}
-
 		return $result;//成功返回ID
 	}
 	//编辑活动
