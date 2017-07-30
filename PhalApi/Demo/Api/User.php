@@ -1,8 +1,10 @@
 <?php
 
-class Api_User extends PhalApi_Api {
+class Api_User extends PhalApi_Api
+{
 
-    public function getRules() {
+    public function getRules()
+    {
         return array(
             'getBaseInfo' => array(
                 'userId' => array('name' => 'user_id', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户ID'),
@@ -17,13 +19,15 @@ class Api_User extends PhalApi_Api {
                 'userName' => array('name' => 'user_name', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '真实姓名'),
                 'userNick' => array('name' => 'user_nick', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '用户昵称'),
                 'userGender' => array('name' => 'user_gender', 'type' => 'string', 'min' => 2, 'require' => true, 'desc' => '性别'),
-                'userAddress' => array('name' => 'user_address', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => '住址'),   
-                'userPhone' => array('name' => 'user_phone', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '电话'),   
-                'userUrgentName' => array('name' => 'user_urgentname', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '紧急联系人'),   
-                'userUrgentPhone' => array('name' => 'user_urgentphone', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '紧急联系人电话'),  
-                'userQQ' => array('name' => 'user_qq', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => 'QQ'), 
-                'userInterest' => array('name' => 'user_interest', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => '兴趣领域'),  
-                'userComments' => array('name' => 'user_comments', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => '备注'),                                                                
+                'userAddress' => array('name' => 'user_address', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => '住址'),
+                'userPhone' => array('name' => 'user_phone', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '电话'),
+                'userWeiboName' => array('name' => 'user_weiboName', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '微博名'),
+                'userWeiboLink' => array('name' => 'user_weiboLink', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '微博地址'),
+                'userUrgentName' => array('name' => 'user_urgentName', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '紧急联系人'),
+                'userUrgentPhone' => array('name' => 'user_urgentPhone', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '紧急联系人电话'),
+                'userQQ' => array('name' => 'user_qq', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => 'QQ'),
+                'userInterest' => array('name' => 'user_interest', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => '兴趣领域'),
+                'userComments' => array('name' => 'user_comments', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => '备注'),
             ),//用户注册
             'update' => array(
                 'userId' => array('name' => 'user_id', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户ID'),
@@ -34,8 +38,10 @@ class Api_User extends PhalApi_Api {
                 'userGender' => array('name' => 'user_gender', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '性别'),
                 'userAddress' => array('name' => 'user_address', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '住址'),
                 'userPhone' => array('name' => 'user_phone', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '电话'),
-                'userUrgentName' => array('name' => 'user_urgentname', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '紧急联系人'),
-                'userUrgentPhone' => array('name' => 'user_urgentphone', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '紧急联系人电话'),
+                'userWeiboName' => array('name' => 'user_weiboName', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '微博名'),
+                'userWeiboLink' => array('name' => 'user_weiboLink', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '微博地址'),
+                'userUrgentName' => array('name' => 'user_urgentName', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '紧急联系人'),
+                'userUrgentPhone' => array('name' => 'user_urgentPhone', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '紧急联系人电话'),
                 'userQQ' => array('name' => 'user_qq', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => 'QQ'),
                 'userInterest' => array('name' => 'user_interest', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '兴趣领域'),
                 'userComments' => array('name' => 'user_comments', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '备注'),
@@ -56,8 +62,9 @@ class Api_User extends PhalApi_Api {
      * @return string info.... 包含用户表的所有信息，具体字段名参考用户表
      * @return string msg 提示信息
      */
-    public function getBaseInfo() {
-        DI()->logger->info('User.getBaseInfo api is call.',$this->userId);
+    public function getBaseInfo()
+    {
+        DI()->logger->info('User.getBaseInfo api is call.', $this->userId);
         $rs = array('code' => 0, 'msg' => '', 'info' => array());
 
         $domain = new Domain_User();
@@ -75,22 +82,24 @@ class Api_User extends PhalApi_Api {
 
         return $rs;
     }
+
     /**
      * 登陆
      * @desc 用户登陆
      * @return int code 操作码，0表示成功，1表示用户不存在,2表示密码错误
      * @return string msg 提示信息
-	 * @return string userid 用户id
+     * @return string userid 用户id
      */
-    public function login() {
-        $rs = array('code' => 0, 'msg' => '','userid'=>'');
-		$email=$this->userEmail;
-		$password=$this->userPassword;
-        DI()->logger->info('User.login api is call.',$email);
+    public function login()
+    {
+        $rs = array('code' => 0, 'msg' => '', 'userid' => '');
+        $email = $this->userEmail;
+        $password = $this->userPassword;
+        DI()->logger->info('User.login api is call.', $email);
 
-		//系统框架会自动检查必要的字段输入是否为空
+        //系统框架会自动检查必要的字段输入是否为空
         $domain = new Domain_User();
-        $info = $domain->login($email,$password);//登陆成功返回userid
+        $info = $domain->login($email, $password);//登陆成功返回userid
 
         if (empty($info)) {
             DI()->logger->debug('username or password not right');
@@ -104,6 +113,7 @@ class Api_User extends PhalApi_Api {
 
         return $rs;
     }
+
     /**
      * 用户注册
      * @desc 用于用户注册
@@ -111,13 +121,15 @@ class Api_User extends PhalApi_Api {
      * @return string userid 用户id
      * @return string msg 提示信息
      */
-    public function register() {
+    public function register()
+    {
         $rs = array('code' => 0, 'msg' => '', 'userid' => '');
-		$input = array('user_email' => $this->userEmail, 'user_psw' => $this->userPassword, 'user_name' => $this->userName,
-		'user_nick' => $this->userNick, 'user_gender' => $this->userGender, 'user_address' => $this->userAddress,
-		'user_phone' => $this->userPhone, 'user_urgentname' => $this->userUrgentName, 'user_urgentphone' => $this->userUrgentPhone,
-		'user_qq' => $this->userQQ, 'user_interest' => $this->userInterest, 'user_comments' => $this->userComments);
-        DI()->logger->info('User.register api is call.',$input);
+        $input = array('user_email' => $this->userEmail, 'user_psw' => $this->userPassword, 'user_name' => $this->userName,
+            'user_nick' => $this->userNick, 'user_gender' => $this->userGender, 'user_address' => $this->userAddress,
+            'user_phone' => $this->userPhone, 'user_weiboName' => $this->userWeiboName, 'user_weiboLink' => $this->userWeiboLink,
+            'user_urgentName' => $this->userUrgentName, 'user_urgentPhone' => $this->userUrgentPhone,
+            'user_qq' => $this->userQQ, 'user_interest' => $this->userInterest, 'user_comments' => $this->userComments);
+        DI()->logger->info('User.register api is call.', $input);
 
         $domain = new Domain_User();
         $info = $domain->register($input);
@@ -128,8 +140,8 @@ class Api_User extends PhalApi_Api {
             $rs['code'] = 1;
             $rs['msg'] = T('register fail.');
             return $rs;
-        }elseif(!empty($info['error'])){
-        	$rs['code'] = 1;
+        } elseif (!empty($info['error'])) {
+            $rs['code'] = 1;
             $rs['msg'] = T($info['error']);
             return $rs;
         }
@@ -137,26 +149,29 @@ class Api_User extends PhalApi_Api {
         $rs['userid'] = $info['userid'];
 
         return $rs;
-    }	
+    }
+
     /**
      * 更新用户资料
      * @desc 用于更新用户资料
      * @return int code 操作码，0表示成功，1失败
      * @return string msg 提示信息
      */
-    public function update() {
+    public function update()
+    {
         $rs = array('code' => 0, 'msg' => '');
-		$input = array('user_id' => $this->userId,'user_email' => $this->userEmail, 'user_psw' => $this->userPassword, 'user_name' => $this->userName,
-		'user_nick' => $this->userNick, 'user_gender' => $this->userGender, 'user_address' => $this->userAddress,
-		'user_phone' => $this->userPhone, 'user_urgentname' => $this->userUrgentName, //'user_urgentphone' => $this->userUrgentPhone,
-		'user_qq' => $this->userQQ, 'user_interest' => $this->userInterest, 'user_comments' => $this->userComments);
+        $input = array('user_id' => $this->userId, 'user_email' => $this->userEmail, 'user_psw' => $this->userPassword, 'user_name' => $this->userName,
+            'user_nick' => $this->userNick, 'user_gender' => $this->userGender, 'user_address' => $this->userAddress,
+            'user_phone' => $this->userPhone, 'user_weiboName' => $this->userWeiboName, 'user_weiboLink' => $this->userWeiboLink,
+            'user_urgentName' => $this->userUrgentName, 'user_urgentPhone' => $this->userUrgentPhone,
+            'user_qq' => $this->userQQ, 'user_interest' => $this->userInterest, 'user_comments' => $this->userComments);
 
-        DI()->logger->info('User.update api is call.',$input);
+        DI()->logger->info('User.update api is call.', $input);
 
         $domain = new Domain_User();
         $info = $domain->update($input);
 
-        if ($info===FALSE) {
+        if ($info === FALSE) {
             DI()->logger->debug('update fail');
 
             $rs['code'] = 1;
@@ -165,7 +180,8 @@ class Api_User extends PhalApi_Api {
         }
 
         return $rs;
-    }		
+    }
+
     /**
      * 批量获取用户基本信息
      * @desc 用于获取多个用户基本信息
@@ -176,8 +192,9 @@ class Api_User extends PhalApi_Api {
      * @return string list[]..... 其他字段参考用户信息表
      * @return string msg 提示信息
      */
-    public function getMultiBaseInfo() {
-        DI()->logger->info('User.getMultiBaseInfo api is call.',$this->userIds);
+    public function getMultiBaseInfo()
+    {
+        DI()->logger->info('User.getMultiBaseInfo api is call.', $this->userIds);
 
         $rs = array('code' => 0, 'msg' => '', 'list' => array());
 
