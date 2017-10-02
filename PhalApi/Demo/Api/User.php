@@ -28,6 +28,7 @@ class Api_User extends PhalApi_Api
                 'userQQ' => array('name' => 'user_qq', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => 'QQ'),
                 'userInterest' => array('name' => 'user_interest', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => '兴趣领域'),
                 'userComments' => array('name' => 'user_comments', 'type' => 'string', 'min' => 1, 'require' => FALSE, 'desc' => '备注'),
+                'userAvatarUrl' => array('name' => 'user_avatar_url', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '用户头像地址'),
             ),//用户注册
             'update' => array(
                 'userId' => array('name' => 'user_id', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户ID'),
@@ -45,6 +46,7 @@ class Api_User extends PhalApi_Api
                 'userQQ' => array('name' => 'user_qq', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => 'QQ'),
                 'userInterest' => array('name' => 'user_interest', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '兴趣领域'),
                 'userComments' => array('name' => 'user_comments', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '备注'),
+                'userAvatarUrl' => array('name' => 'user_avatar_url', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '用户头像地址'),
             ),//用户修改个人资料
             'getMultiBaseInfo' => array(
                 'userIds' => array('name' => 'user_ids', 'type' => 'array', 'format' => 'explode', 'require' => true, 'desc' => '用户ID，多个以逗号分割'),
@@ -128,7 +130,7 @@ class Api_User extends PhalApi_Api
             'user_nick' => $this->userNick, 'user_gender' => $this->userGender, 'user_address' => $this->userAddress,
             'user_phone' => $this->userPhone, 'user_weiboName' => $this->userWeiboName, 'user_weiboLink' => $this->userWeiboLink,
             'user_urgentName' => $this->userUrgentName, 'user_urgentPhone' => $this->userUrgentPhone,
-            'user_qq' => $this->userQQ, 'user_interest' => $this->userInterest, 'user_comments' => $this->userComments);
+            'user_qq' => $this->userQQ, 'user_interest' => $this->userInterest, 'user_comments' => $this->userComments,'user_avatar_url' => $this->userAvatarUrl);
         DI()->logger->info('User.register api is call.', $input);
 
         $domain = new Domain_User();
@@ -164,7 +166,7 @@ class Api_User extends PhalApi_Api
             'user_nick' => $this->userNick, 'user_gender' => $this->userGender, 'user_address' => $this->userAddress,
             'user_phone' => $this->userPhone, 'user_weiboName' => $this->userWeiboName, 'user_weiboLink' => $this->userWeiboLink,
             'user_urgentName' => $this->userUrgentName, 'user_urgentPhone' => $this->userUrgentPhone,
-            'user_qq' => $this->userQQ, 'user_interest' => $this->userInterest, 'user_comments' => $this->userComments);
+            'user_qq' => $this->userQQ, 'user_interest' => $this->userInterest, 'user_comments' => $this->userComments,'user_avatar_url' => $this->userAvatarUrl);
 
         DI()->logger->info('User.update api is call.', $input);
 
