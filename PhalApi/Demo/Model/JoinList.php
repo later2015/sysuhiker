@@ -27,6 +27,10 @@ class Model_JoinList extends PhalApi_Model_NotORM {
 		$this -> getORM() -> insert($input);
 		return $this -> getORM() -> insert_id();
 	}
+    //编辑活动报名信息
+    public function edit($input) {
+        return $this -> getORM() -> where('event_joinlist_eventid =? and event_joinlist_userid =?', $input['event_joinlist_eventid'],$input['event_joinlist_userid'])-> update($input);
+    }
 	public function quit($input) {
 		return $this -> getORM() -> where('event_joinlist_eventid =? and event_joinlist_userid =?', $input['event_joinlist_eventid'],$input['event_joinlist_userid'])-> update($input);
 	}

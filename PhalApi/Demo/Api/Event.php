@@ -40,6 +40,25 @@ class Api_Event extends PhalApi_Api
                 'userBurner' => array('name' => 'event_joinlist_userBurner', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '炉头信息'),
                 'userpot' => array('name' => 'event_joinlist_userpot', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '套锅信息'),
             ),//报名参加活动
+            'editJoinEventInfo' => array(
+                'eventId' => array('name' => 'event_joinlist_eventid', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
+                'userId' => array('name' => 'event_joinlist_userid', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户id'),
+                'userPhone' => array('name' => 'event_joinlist_userphone', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '电话'),
+                'qq' => array('name' => 'event_joinlist_qq', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => 'qq'),
+                'userUrgentName' => array('name' => 'event_joinlist_userurgentname', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '紧急联系人'),
+                'userUrgentPhone' => array('name' => 'event_joinlist_userurgentphone', 'type' => 'string', 'min' => 1, 'require' => true, 'desc' => '紧急联系人电话'),
+                'useraddress' => array('name' => 'event_joinlist_useraddress', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '地址'),
+                'userrole' => array('name' => 'event_joinlist_userrole', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '团队角色'),
+                'userComments' => array('name' => 'event_joinlist_comments', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '备注'),
+                'insurance' => array('name' => 'event_joinlist_insurance', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '保险信息'),
+                'usercamp' => array('name' => 'event_joinlist_usercamp', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '帐篷信息'),
+                'usercamppad' => array('name' => 'event_joinlist_usercamppad', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '防潮垫信息'),
+                'usersleepingbag' => array('name' => 'event_joinlist_usersleepingbag', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '睡袋信息'),
+                'userinterphone' => array('name' => 'event_joinlist_userinterphone', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '对讲机信息'),
+                'userbag' => array('name' => 'event_joinlist_userbag', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '登山包信息'),
+                'userBurner' => array('name' => 'event_joinlist_userBurner', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '炉头信息'),
+                'userpot' => array('name' => 'event_joinlist_userpot', 'type' => 'string', 'min' => 0, 'require' => FALSE, 'desc' => '套锅信息'),
+            ),//修改活动报名信息
             'quit' => array(
                 'eventId' => array('name' => 'event_joinlist_eventid', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '活动ID'),
                 'userId' => array('name' => 'event_joinlist_userid', 'type' => 'int', 'min' => 1, 'require' => true, 'desc' => '用户id'),
@@ -302,7 +321,38 @@ class Api_Event extends PhalApi_Api
 
         return $rs;
     }
+    /**
+     * 编辑活动报名信息
+     * @desc 编辑活动报名信息
+     * @return int code 操作码，0表示成功，1表示失败
+     * @return string msg 提示信息
+     * ,,
+     */
+    public function editJoinEventInfo()
+    {
+        $rs = array('code' => 0, 'msg' => '');
+        $input = array('event_joinlist_eventid' => $this->eventId, 'event_joinlist_userid' => $this->userId, 'event_joinlist_userphone' => $this->userPhone, 'event_joinlist_qq' => $this->qq,
+            'event_joinlist_userurgentname' => $this->userUrgentName, 'event_joinlist_userurgentphone' => $this->userUrgentPhone, 'event_joinlist_comments' => $this->userComments, 'event_joinlist_useraddress' => $this->useraddress,
+            'event_joinlist_insurance' => $this->insurance, 'event_joinlist_usercamp' => $this->usercamp, 'event_joinlist_usercamppad' => $this->usercamppad,
+            'event_joinlist_usersleepingbag' => $this->usersleepingbag, 'event_joinlist_userinterphone' => $this->userinterphone, 'event_joinlist_userbag' => $this->userbag,
+            'event_joinlist_userBurner' => $this->userBurner, 'event_joinlist_userpot' => $this->userpot, 'event_joinlist_userrole' => $this->userrole);
+        DI()->logger->info('Event.joinEvent api is call.',$input);
 
+        $domain = new Domain_Event();
+        $result = $domain->editJoinEventInfo($input);
+
+        if ($result != 'success') {
+            DI()->logger->debug('fail to join.');
+
+            $rs['code'] = 1;
+            $rs['msg'] = T('fail to join.' . $result);
+            return $rs;
+        }
+
+        $rs['msg'] = "success";
+
+        return $rs;
+    }
     /**
      * 退出活动
      * @desc 退出活动
