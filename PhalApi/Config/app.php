@@ -9,7 +9,7 @@ return array(
      * 应用接口层的统一参数
      */
     'apiCommonRules' => array(
-        //'sign' => array('name' => 'sign', 'require' => true),//TODO 需增加签名字段必填选项。
+        'sign' => array('name' => 'sign', 'require' => true),//签名字段必填选项。
     ),
 
     /**
