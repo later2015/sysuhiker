@@ -37,10 +37,11 @@ SL('zh_cn');
 DI()->ucloud = new UCloud_Lite();
 /** ---------------- 定制注册 可选服务组件 ---------------- **/
 
+DI()->filter = new PhalApi_Filter_SysuhikerMD5('sign');//自定义的签名组件
 /**
 //签名验证服务
 DI()->filter = 'PhalApi_Filter_SimpleMD5';//系统默认
-DI()->filter = new PhalApi_Filter_SysuhikerMD5('key');//自定义的签名组件
+
  *
  *
  *
