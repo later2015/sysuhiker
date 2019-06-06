@@ -17,7 +17,7 @@ include 'navigation.php'; ?>
   	</tr>
 	<?php
 	$db=new SaeMysql();
-	
+
 	$tabname = 'event_info';
 	$condExp = "order by event_join_endtime desc";
 	$sql="select * from ".$tabname." ".$condExp." limit 0, 20";
