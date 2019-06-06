@@ -19,7 +19,7 @@ if (isset($_POST["username"]) && isset($_POST["useremail"])) {
 }
 function checkValidCode($validCode)
 {
-    $dateTime = date("YYmmddHHiiss");
+    $dateTime = date("Ymd");
     $serverValidCode = substr(md5($dateTime), 0, 6);
     $validCodeResult = "true";
     if ($validCode != $serverValidCode) {
