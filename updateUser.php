@@ -166,7 +166,7 @@ if ($error == false) // $error==false 表示没有错误
     if($oldpsw==$olddbpsw){
     //$Datetime = date("Y-m-d H:i:s"); // 获取时间，也就是数据写入到用户表的时间
 
-    $key=md5($useremail1.$Datetime);
+    //$key=md5($useremail1.$Datetime);
     
     //定义要数据库执行的sql语句 
     $sql = "update event_hiker set user_name='$username1',
